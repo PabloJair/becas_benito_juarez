@@ -1,0 +1,19 @@
+apply plugin: 'com.android.application'
+apply from: "$rootDir/common-kotlin.gradle"
+apply from: "$rootDir/common-compile.gradle"
+//apply plugin: 'com.google.gms.google-services'
+
+android{
+    defaultConfig {
+        applicationId "com.s10plus.becas.benitojuarez"
+
+    }
+
+}
+dependencies {
+    implementation project(path: ':core_application')
+    implementation project(path: ':splash')
+    implementation project(path: ':feature_login')
+
+}
+

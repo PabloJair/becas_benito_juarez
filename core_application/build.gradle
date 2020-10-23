@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/common-kotlin.gradle"
+apply from: "$rootDir/common-compile.gradle"
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+
+    api 'com.google.android.material:material:1.2.1'
+
+    api 'androidx.constraintlayout:constraintlayout:2.0.2'
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'androidx.appcompat:appcompat:1.2.0'
+
+    api "org.koin:koin-androidx-scope:$koin_version"
+    api "org.koin:koin-androidx-viewmodel:$koin_version"
+    api "org.koin:koin-androidx-ext:$koin_version"
+    api "org.koin:koin-androidx-fragment:$koin_version"
+    api "org.koin:koin-core:$koin_version"
+    api "com.squareup.picasso:picasso:$picasso_version"
+
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava2:rxjava:2.2.9'
+
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-jaxb:$retrofit_version"
+    api "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    api "android.arch.persistence.room:rxjava2:1.1.1"
+
+
+
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01'
+
+
+    api 'androidx.room:room-runtime:2.2.5'
+    api "androidx.room:room-ktx:2.2.5"
+    api "androidx.room:room-rxjava2:2.2.5"
+
+    kapt 'androidx.room:room-compiler:2.2.5'
+    api 'androidx.work:work-runtime:2.4.0'
+
+    api "com.airbnb.android:lottie:$lottieVersion"
+
+    api 'com.google.code.gson:gson:2.8.6'
+    api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    api 'com.blankj:utilcodex:1.29.0'
+    api 'com.github.kizitonwose:CalendarView:0.4.2'
+
+    //api 'com.google.firebase:firebase-analytics:17.6.0'
+    //api 'com.google.firebase:firebase-messaging:20.3.0'
+
+    api 'de.hdodenhof:circleimageview:3.1.0'
+    api 'com.github.tobiasschuerg:android-week-view:1.5.0'
+
+
+
+}

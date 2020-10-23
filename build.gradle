@@ -1,0 +1,35 @@
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    ext.lifecycle_version = '2.2.0'
+    ext.koin_version = "2.1.5"
+    ext.picasso_version ="2.71828"
+    ext.retrofit_version = '2.9.0'
+    ext.io_reactivex_version ="3.0.0"
+    ext.lottieVersion= '3.4.1'
+
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //classpath 'com.google.gms:google-services:4.3.4'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

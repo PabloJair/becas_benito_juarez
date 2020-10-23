@@ -1,0 +1,5 @@
+include ':feature_login'
+include ':splash'
+include ':core_application'
+include ':app'
+rootProject.name = "BecasBenitoJuarez"

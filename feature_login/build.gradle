@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+apply from: "$rootDir/common-kotlin.gradle"
+apply from: "$rootDir/common-compile.gradle"
+
+
+
+dependencies {
+    api project(':core_application')
+
+
+}

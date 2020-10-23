@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+
+    <color name="primary">#FFFFFF</color>
+    <color name="primary_dark">#607D8B</color>
+    <color name="secundary">#4EB3BF</color>
+    <color name="accent">#FF5722</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="colorSecundary">#4EB3BF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="color_title_login">#003147</color>
+    <color name="form_color_box">#ADC0CE</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#ADC0CE</color>
+
+    <color name="background_hour">#ffffffff</color>
+
+    <color name="background_hour_selected">#363F4FB5</color>
+
+</resources>
+
