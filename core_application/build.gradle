@@ -13,7 +13,7 @@ dependencies {
 
     api 'com.google.android.material:material:1.2.1'
 
-    api 'androidx.constraintlayout:constraintlayout:2.0.2'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api 'androidx.appcompat:appcompat:1.2.0'
 
@@ -62,6 +62,6 @@ dependencies {
     api 'de.hdodenhof:circleimageview:3.1.0'
     api 'com.github.tobiasschuerg:android-week-view:1.5.0'
 
-
+    api 'com.facebook.android:facebook-login:5.15.3'
 
 }

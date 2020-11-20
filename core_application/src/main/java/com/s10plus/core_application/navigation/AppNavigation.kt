@@ -7,7 +7,7 @@ object AppNavigation {
 
 
     fun openMainView(context: Context): Intent =
-        intentClearTop(internalIntent(context, "com.s10plus.feature_main.open"))
+        intentClearTop(internalIntent(context, "com.s10plus.becas.benitojuarez.feature_main.open"))
     fun openRegister(context: Context): Intent =
         intentClearTop(internalIntent(context, "com.s10plus.feature_register.open"))
     fun openLogin(context: Context): Intent =

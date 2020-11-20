@@ -5,6 +5,8 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.blankj.utilcode.util.LogUtils
+import com.facebook.FacebookActivity
+import com.facebook.FacebookSdk
 /*import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging*/
@@ -18,6 +20,7 @@ class S10PlusApplication: Application() {
         super.onCreate()
 
         currentApplication = this
+
         startKoin {
             // declare used Android context
             androidContext(this@S10PlusApplication)

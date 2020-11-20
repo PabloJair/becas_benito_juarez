@@ -20,6 +20,7 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes private var idLayout:
     abstract fun setupObserver()
     open fun setupInjection(){}
 
+
     abstract fun init()
 
 

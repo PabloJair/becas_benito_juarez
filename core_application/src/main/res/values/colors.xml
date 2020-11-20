@@ -18,5 +18,8 @@
 
     <color name="background_hour_selected">#363F4FB5</color>
 
+    <color name="blue">#003147</color>
+    <color name="gray">#ADC0CE</color>
+
 </resources>
 

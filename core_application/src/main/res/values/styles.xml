@@ -1,40 +1,12 @@
 <resources>
     <style name="AppTheme"      parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="colorPrimary">@color/secundary</item>
-        <item name="colorSecondary">@color/primary</item>
-        <item name="colorAccent">@color/accent</item>
-
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-
-        <item name="colorSecondaryVariant">@color/colorSecundary</item>
-    </style>
-
-
-    <style name="ShapeAppearance.s10plusTheme.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">4dp</item>
-    </style>
-
-    <style name="s10plusRoundedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="cornerRadius">20dp</item>
-    </style>
-
-    <style name="s10plusRoundedButtonBackground" >
-        <item name="cornerRadius">20dp</item>
     </style>
 
 
 
-    <style name="ShapeAppearance.s10plusTheme.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">8dp</item>
-    </style>
 
-    <style name="ShapeAppearance.s10plusTheme.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">4dp</item>
-    </style>
+
 
     <style name="s10plus_dialog_title">
         <item name="android:layout_width">match_parent</item>
@@ -74,15 +46,7 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
-    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="android:textColorHint">@color/secundary</item>
-        <item name="android:hint">@color/secundary</item>
-        <item name="android:textColor">#FFFF00</item>
-        <item name="colorAccent">#FF00FF</item>
-        <item name="colorControlNormal">#FF0000</item>
-        <item name="colorControlActivated">#00FF00</item>
-        <item name="colorControlHighlight">#0000FF</item>
-    </style>
+
 
 
 
