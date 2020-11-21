@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="greenButtonAttributes">
-        <attr name="text" format="string" />
-        <attr name="image" format="reference" />
-
+    <declare-styleable name="green_button_attributes">
+        <attr name="text_button" format="string" />
+        <attr name="image_button" format="reference" />
         <attr name="imagePosition" format="enum">
             <enum name="left" value="0"/>
             <enum name="right" value="1"/>

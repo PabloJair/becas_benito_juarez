@@ -19,6 +19,7 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes private var idLayout:
     abstract fun setupViewModel()
     abstract fun setupObserver()
     open fun setupInjection(){}
+    open var layoutIdFragment:Int = 0
 
 
     abstract fun init()
@@ -61,7 +62,7 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes private var idLayout:
             else -> {}
         }
     }
-    open  fun assignFragment( layoutId:Int,fragment:Fragment)=supportFragmentManager.beginTransaction().replace(layoutId,fragment).commit()
+    open  fun assignFragment( layoutId:Int=layoutIdFragment,fragment:Fragment)=supportFragmentManager.beginTransaction().replace(layoutId,fragment).commit()
 
 
 

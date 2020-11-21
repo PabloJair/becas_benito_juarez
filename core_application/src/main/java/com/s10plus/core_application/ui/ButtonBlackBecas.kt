@@ -5,41 +5,35 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 
 import com.s10plus.core_application.R
+import com.s10plus.core_application.databinding.ButtonBlackBinding
 import com.s10plus.core_application.databinding.ButtonGreenBinding
 
 
-class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearLayout(context, attrs){
+class ButtonBlackBecas(context: Context, var attrs: AttributeSet?): LinearLayout(context, attrs){
 
-    val binding:ButtonGreenBinding  = ButtonGreenBinding.inflate(LayoutInflater.from(context),this,true)
+    val binding:ButtonBlackBinding  = ButtonBlackBinding.inflate(LayoutInflater.from(context),this,true)
 
     var text = binding.text.text!!
     set(value) {
         binding.text.text = value
         field = value
     }
-    public var model:Any? =null
-
-    public fun setImageResource(idRes:Int)=binding.image.setImageResource(idRes)
-
-
     var showImage =true
-        set(value) {
-            field = value
+    set(value) {
+        field = value
 
-            binding.image.visibility = if(field) View.VISIBLE else View.GONE
-        }
+        binding.image.visibility = if(field) View.VISIBLE else View.GONE
+    }
 
     var onClick:((view: View)->Unit)?=null
 
     init {
         try {
-
 
             orientation = LinearLayout.VERTICAL
 
@@ -59,26 +53,6 @@ class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearL
                 }
 
         }catch (e:Exception){}
-    }
-
-    companion object {
-
-        fun instance(context: Context,model:Any):ButtonGreenBecas{
-
-            return ButtonGreenBecas(context).apply {
-
-
-                this.model=model
-                layoutParams = ViewGroup.MarginLayoutParams(
-                    ViewGroup.MarginLayoutParams.MATCH_PARENT,
-                    ViewGroup.MarginLayoutParams.WRAP_CONTENT)
-                    .apply {
-                        setMargins(12,12,12,12)
-                    }
-
-
-            }
-        }
     }
 
 
