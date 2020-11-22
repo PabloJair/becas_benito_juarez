@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
@@ -14,7 +15,7 @@ import com.s10plus.core_application.databinding.ButtonBlackBinding
 import com.s10plus.core_application.databinding.ButtonGreenBinding
 
 
-class ButtonBlackBecas(context: Context, var attrs: AttributeSet?): LinearLayout(context, attrs){
+class ButtonBlackBecas(context: Context, var attrs: AttributeSet?=null): LinearLayout(context, attrs){
 
     val binding:ButtonBlackBinding  = ButtonBlackBinding.inflate(LayoutInflater.from(context),this,true)
 
@@ -31,6 +32,12 @@ class ButtonBlackBecas(context: Context, var attrs: AttributeSet?): LinearLayout
     }
 
     var onClick:((view: View)->Unit)?=null
+    public var model:Any? =null
+    public fun setImageResource(idRes:Int){
+        if(idRes == 0)
+            binding.image.visibility = GONE
+        binding.image.setImageResource(idRes)
+    }
 
     init {
         try {
@@ -55,6 +62,24 @@ class ButtonBlackBecas(context: Context, var attrs: AttributeSet?): LinearLayout
         }catch (e:Exception){}
     }
 
+    companion object {
 
+        fun instance(context: Context,model:Any):ButtonBlackBecas{
+
+            return ButtonBlackBecas(context).apply {
+
+
+                this.model=model
+                layoutParams = ViewGroup.MarginLayoutParams(
+                    ViewGroup.MarginLayoutParams.MATCH_PARENT,
+                    ViewGroup.MarginLayoutParams.WRAP_CONTENT)
+                    .apply {
+                        setMargins(12,12,12,12)
+                    }
+
+
+            }
+        }
+    }
 
 }

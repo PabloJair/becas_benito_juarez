@@ -63,6 +63,10 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes private var idLayout:
         }
     }
     open  fun assignFragment( layoutId:Int=layoutIdFragment,fragment:Fragment)=supportFragmentManager.beginTransaction().replace(layoutId,fragment).commit()
+    open  fun assignFragmentBackStack( layoutId:Int=layoutIdFragment,fragment:Fragment)=
+        supportFragmentManager.apply {
+
+        }.beginTransaction().addToBackStack(null).replace(layoutId,fragment).commit()
 
 
 

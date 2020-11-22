@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="text_1_menu_1">
+    <![CDATA[
+
+        La beca de Educación Básica está dirigida a
+familias con niñas, niños y/o adolescentes
+inscritos en Instituciones de Educación Básica
+(inicial, primaria y secundaria) o con infantes
+menores de cinco años, habitantes en localidades
+prioritarias.
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+La beca consiste en un apoyo de $1,600
+bimestrales, durante los diez meses que dura el
+ciclo escolar. Únicamente se otorga una beca por
+familia.
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+
+La incorporación al programa depende de los
+lugares disponibles conforme a la suficiencia
+presupuestal. Por el momento no hay una convocatoria abierta de
+incorporación, ¡mantente al pendiente!
+      <br/>
+        <br/>
+        <br/>
+        <br/>
+            ]]>
+
+    </string>
+    <string name="text_2_menu_1">
+   <![CDATA[
+            ¿Quieres saber más? Visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"> preguntas frecuentes.</a>
+
+        ]]>
+    </string>
+
+
+    <string name="text_1_menu_2">
+    <![CDATA[
+
+La <b>beca de Educación Media Superior</b> está
+dirigida a todos los estudiantes que cursan este
+nivel educativo en Instituciones Públicas de
+modalidad escolarizada o mixta.
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+La beca consiste en un apoyo de $1,600
+bimestrales, durante los diez meses que dura el
+ciclo escolar.
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+Para que puedas ser beneficiario de este apoyo,
+no necesitas realizar algún trámite, únicamente
+es necesario que te encuentres inscrito y tu
+escuela nos lo informará al inicio de cada
+semestre escolar (febrero y septiembre).
+      <br/>
+        <br/>
+        <br/>
+        <br/>
+            ]]>
+
+    </string>
+    <string name="text_2_menu_2">
+   <![CDATA[
+            ¿Quieres saber más? Visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"> preguntas frecuentes.</a>
+
+        ]]>
+    </string>
+
+</resources>
