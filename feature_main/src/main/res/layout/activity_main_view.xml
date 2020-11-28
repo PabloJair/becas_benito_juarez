@@ -2,129 +2,23 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-
-            <include
-                android:id="@+id/appBarLayout"
-                layout="@layout/layout_app_bar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-
-            <RelativeLayout
+            <FrameLayout
+                android:id="@+id/containerFragment"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
-
-                <FrameLayout
-                    android:id="@+id/containerFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </RelativeLayout>
+                android:layout_height="match_parent" />
+        </RelativeLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            tools:visibility="visible"
-            android:fitsSystemWindows="true"
-            tools:theme ="@style/AppTheme">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/navHeader"
-                    android:layout_width="match_parent"
-
-                    android:paddingStart="16dp"
-                    android:background="@drawable/header_background"
-                    android:backgroundTint="@color/secundary"
-                    android:layout_height="@dimen/nav_header_height"
-                    android:orientation="vertical">
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Correo "
-                            android:textColor="@color/color_title_login"
-                            app:layout_constraintTop_toBottomOf="@+id/name" />
-
-                        <TextView
-                            android:id="@+id/name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:paddingTop="@dimen/nav_header_vertical_spacing"
-                            android:text="Nombre de la persona"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/primary"
-                            app:layout_constraintTop_toBottomOf="@+id/photoProfile"
-                            tools:layout_editor_absoluteX="70dp" />
-
-                        <ImageView
-                            android:id="@+id/photoProfile"
-
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginTop="24dp"
-                            android:contentDescription="@string/nav_header_desc"
-                            android:paddingTop="@dimen/nav_header_vertical_spacing"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_person_outline" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="start"
-                    android:layout_weight="1"
-
-                    tools:listitem="@layout/item_menu"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerSecundaryMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
-                    android:layout_weight="2"
-
-                    tools:listitem="@layout/item_menu"
-                    />
-
-            </LinearLayout>
-
-        </com.google.android.material.navigation.NavigationView>
-
-    </androidx.drawerlayout.widget.DrawerLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -187,4 +187,5 @@ class LoginView:BaseActivity<ActivityLoginViewBinding>(R.layout.activity_login_v
         }
 
     }
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="text_1_menu_1">
+    <string name="text_1_menu_1" translatable="false">
     <![CDATA[
 
         La beca de Educación Básica está dirigida a
@@ -35,7 +35,7 @@ incorporación, ¡mantente al pendiente!
             ]]>
 
     </string>
-    <string name="text_2_menu_1">
+    <string name="text_2_menu_1" translatable="false">
    <![CDATA[
             ¿Quieres saber más? Visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"> preguntas frecuentes.</a>
 
@@ -43,7 +43,7 @@ incorporación, ¡mantente al pendiente!
     </string>
 
 
-    <string name="text_1_menu_2">
+    <string name="text_1_menu_2" translatable="false">
     <![CDATA[
 
 La <b>beca de Educación Media Superior</b> está
@@ -73,11 +73,29 @@ semestre escolar (febrero y septiembre).
             ]]>
 
     </string>
-    <string name="text_2_menu_2">
+    <string name="text_2_sbm_2" translatable="false">
    <![CDATA[
             ¿Quieres saber más? Visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"> preguntas frecuentes.</a>
 
         ]]>
     </string>
+
+    <string name="text_1_sbm_2" tools:ignore="ExtraTranslation">
+   <![CDATA[
+Derivado de la emergencia
+sanitaria,
+la
+Coordinación
+Nacional de Becas para el
+Bienestar Benito Juárez en
+conjunto con Banco Azteca,
+diseñamos
+el
+sitio
+<a href="https://bienestarazteca.com/"> preguntas frecuentes.</a>
+para que puedas recibir tu beca
+de forma electrónica.
+        ]]>
+    </string >
 
 </resources>

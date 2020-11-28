@@ -1,6 +1,6 @@
 package com.s10plus.becas.benitojuarez.splash
 
-import org.junit.Test
+import org.cusjunit.Test
 
 import org.junit.Assert.*
 

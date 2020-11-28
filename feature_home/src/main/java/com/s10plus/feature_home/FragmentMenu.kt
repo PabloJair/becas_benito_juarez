@@ -10,6 +10,9 @@ import com.s10plus.core_application.ui.ButtonBlackBecas
 import com.s10plus.core_application.ui.ButtonGreenBecas
 import com.s10plus.feature_home.MenusCreator.Menu_1
 import com.s10plus.feature_home.MenusCreator.menu_2
+import com.s10plus.feature_home.MenusCreator.menu_3
+import com.s10plus.feature_home.MenusCreator.menu_4
+import com.s10plus.feature_home.MenusCreator.menu_5
 import com.s10plus.feature_home.databinding.FragmentHomeBinding
 import com.s10plus.feature_home.models.DetailsModel
 import com.s10plus.feature_home.models.MenuButtonsModel
@@ -106,6 +109,9 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
 
+        binding.backButton.onClick={
+            activity.onBackPressed()
+        }
 
     }
 
@@ -141,9 +147,9 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             return newInstance(arrayOf((
                     Menu_1(context = context)),
                     menu_2(context = context),
-                MenuButtonsModel("Becas Jovenes Escribiendo el futuro",R.drawable.ic__595919069972,TypeView.MENU),
-                MenuButtonsModel("Becas Elisa Acuña",R.drawable.ic__595833542780,TypeView.MENU),
-                MenuButtonsModel("Controloría Social",R.drawable.ic__595919234976,TypeView.MENU),
+                    menu_3(context =context),
+                menu_4(context =context),
+                menu_5(context),
                 MenuButtonsModel("Oficina Cerca de ti",R.drawable.ic_location_on,TypeView.MENU),
                 MenuButtonsModel("Chat en Línea",R.drawable.ic__579079462900,TypeView.MENU),
 
