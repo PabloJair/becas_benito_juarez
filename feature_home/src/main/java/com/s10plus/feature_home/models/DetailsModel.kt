@@ -8,4 +8,4 @@ import retrofit2.http.Header
 class DetailsModel(vararg var texts:TextDetailModel):Parcelable
 @Parcelize
 
-class TextDetailModel(var text:String, var url:String):Parcelable
+class TextDetailModel(var text:String, var url:String="",var email:String=""):Parcelable

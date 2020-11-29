@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <string name="text_1_menu_1" translatable="false">
+    <string name="text_1_becas_edu_basica" translatable="false">
     <![CDATA[
 
         La beca de Educación Básica está dirigida a
@@ -35,7 +35,7 @@ incorporación, ¡mantente al pendiente!
             ]]>
 
     </string>
-    <string name="text_2_menu_1" translatable="false">
+    <string name="link_1_becas_edu_basica" translatable="false">
    <![CDATA[
             ¿Quieres saber más? Visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"> preguntas frecuentes.</a>
 
@@ -43,7 +43,7 @@ incorporación, ¡mantente al pendiente!
     </string>
 
 
-    <string name="text_1_menu_2" translatable="false">
+    <string name="text_1_becas_edu_sup_inf_gen" translatable="false">
     <![CDATA[
 
 La <b>beca de Educación Media Superior</b> está
@@ -73,29 +73,371 @@ semestre escolar (febrero y septiembre).
             ]]>
 
     </string>
-    <string name="text_2_sbm_2" translatable="false">
+    <string name="link_1_becas_edu_basica_inf_gen" translatable="false">
    <![CDATA[
             ¿Quieres saber más? Visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica"> preguntas frecuentes.</a>
 
         ]]>
     </string>
 
-    <string name="text_1_sbm_2" tools:ignore="ExtraTranslation">
+    <string name="text_1_que_es_bien_azteca" tools:ignore="ExtraTranslation">
    <![CDATA[
-Derivado de la emergencia
-sanitaria,
-la
-Coordinación
-Nacional de Becas para el
-Bienestar Benito Juárez en
-conjunto con Banco Azteca,
-diseñamos
-el
-sitio
-<a href="https://bienestarazteca.com/"> preguntas frecuentes.</a>
-para que puedas recibir tu beca
-de forma electrónica.
+Derivado de la emergencia sanitaria, la Coordinación Nacional de Becas para el Bienestar Benito Juárez en conjunto con Banco Azteca, diseñamos el sitio
         ]]>
-    </string >
+    </string>
 
+    <string name="link_1_que_es_bien_azteca" translatable="false">
+    <![CDATA[
+ <a href="https://bienestarazteca.com/"> https://bienestarazteca.com/.</a>para que puedas recibir tu beca
+de forma electrónica.
+
+            ]]>
+
+    </string>
+
+    <string name="text_1_etapa_1_registro">
+   <![CDATA[ 1. Ingresa a la página ]]>
+    </string>
+    <string name="link_1_etapa_1_registro" translatable="false">
+   <![CDATA[ <a href="https://bienestarazteca.com/"> https://bienestarazteca.com.</a>Lee el aviso de Privacidad. ]]>
+    </string>
+
+    <string name="text_2_etapa_1_registro" tools:ignore="ExtraTranslation">
+   <![CDATA[
+2. Ingresa tu CURP.
+      <br/>
+3. Ingresa los datos que te solicita la aplicación.
+        <br/>
+4. Tómate una foto para que tus siguientes cobros sean más seguros.
+      <br/>
+5. Crea una contraseña y escribe tu número celular y correo electrónico. No puedes utilizar el de otra persona.
+        <br/>
+6. Cuando concluyas, recibirás tu usuario a través de mensaje en tu celular y/o tu correo electrónico registrado.
+]]>
+    </string>
+
+
+    <string name="link_1_etapa_2_recibe">
+   <![CDATA[ 1. Ingresa nuevamente <a href="https://bienestarazteca.com">https://bienestarazteca.com.</a>deberás hacerlo con tu usuario y contraseña. ]]>
+    </string>
+    <string name="text_1_etapa_2_recibe" translatable="false">
+   <![CDATA[
+2. Elige la opción “Recibir apoyo” y
+selecciona si deseas cobrar tu beca en una
+sucursal de Banco Azteca o en un
+establecimiento autorizado.
+        <br/>
+
+3. Ingresa la cantidad que deseas retirar y
+confirma.
+        <br/>
+4. Descarga tu código QR (cobro en banco) o
+código de barras (cobro en tiendas de
+autoservicio).
+        <br/>
+5. Acude a cobrar tu beca, deberás presentar
+al cajero el código QR o código de barras
+generado e ingresar tu NIP. Si eres mayor de
+edad, deberás mostrar credencial del INE si
+deseas cobrar en las tiendas de autoservicio.
+]]>
+    </string>
+
+    <string name="text_1_ayuda_no_me_" tools:ignore="ExtraTranslation">
+   <![CDATA[
+Si al momento de registrarte te aparece el
+mensaje “Los datos son incorrectos, por
+favor verifica e inténtalo más tarde”
+puede deberse a:
+        <br/>
+
+1) Estás cometiendo un error al escribir
+tus datos, verifica que estés ingresando
+correctamente tu información.
+        <br/>
+
+2) Tu correo electrónico y número celular no están actualizados ante la
+Coordinación Nacional de Becas. En este
+caso deberás solicitar una actualización de
+datos directamente en tu escuela con el
+responsable de becas.
+        <br/>
+
+Después de unos días de actualizar tu
+información podrás intentar registrarte
+nuevamente.
+]]>
+    </string>
+
+
+    <string name="text_1_no_llega_cod"> Te recomendamos realizar nuevamente el proceso de registro, es posible que se deba a problemas con la red.    </string>
+
+    <string name="link_1_olvide_password">
+   <![CDATA[ 1) Ingresa a <a href="https://bienestarazteca.com">https://bienestarazteca.com.</a> ]]>
+    </string>
+
+    <string name="text1_olvide_password">
+   <![CDATA[
+
+2) Da clic en Inicia sesión.
+        <br/>
+
+3) Selecciona la opción ¿Olvidaste la contraseña?
+         <br/>
+
+4) Ingresa tu usuario y fecha de nacimiento y sigue las indicaciones que te señala la página electrónica.
+        <br/>
+
+]]>
+    </string>
+
+    <string name="text1_no_aparece_colonia">
+Coloca una colonia cercana a tu
+domicilio, esta información no
+interfiere en el registro exitoso
+ni en la entrega de la beca.
+    </string>
+
+
+    <string name="text1_durante_registro">
+   <![CDATA[
+
+Si durante el registro no te fue
+requerido tomarte la fotografía,
+es probable que no hayas dado
+acceso a tu cámara o ésta no sea
+compatible o no funcione.
+        <br/>
+
+El registro puede concluirse sin
+haberte tomado la foto,
+considera que una vez que te
+encuentres registrado ya no es
+posible agregar una imagen de
+perfil. Esta situación no
+interfiere en el registro exitoso
+ni en la entrega de la beca.
+        <br/>
+
+
+]]>
+    </string>
+
+
+    <string name="text1_cual_es_vigencia">
+   <![CDATA[
+
+El código QR sólo funciona en
+sucursales de Banco Azteca y
+tienen una vigencia de un día.
+        <br/>
+
+El código de barras funciona sólo
+en los establecimientos
+autorizados (Bodega Aurrera,
+Walmart, Chedraui, Superama y
+Sam’s Club) y tiene una vigencia
+de dos días.
+        <br/>
+
+Los códigos podrás generarlos
+las veces que requieras, siempre
+y cuando no hayas cobrado la
+beca.
+        <br/>
+
+]]>
+    </string>
+
+
+
+    <string name="text1_becas_escribiendo_fut_ig">
+   <![CDATA[
+La beca Jóvenes Escribiendo el Futuro está
+dirigida a estudiantes en condición de
+pobreza o vulnerabilidad, que vivan en zonas
+con altos índices de violencia, así como de
+origen indígena y afrodescendientes, que
+estén inscritos en alguna Institución Pública
+de Educación Superior prioritaria, y que
+tengan hasta 29 años de edad.
+        <br/>
+
+La beca consiste en un apoyo de $4,800
+bimestrales que son entregados durante el
+periodo indicado en la convocatoria.
+        <br/>
+
+Para poder ser beneficiario de esta beca es
+necesario estar inscrito en una Institución
+Pública de Educación Superior (IPES), cumplir
+con los requisitos que establezca la
+convocatoria de participación y postularse
+en:
+]]>
+    </string>
+
+
+    <string name="link1_becas_escribiendo_fut_ig">
+   <![CDATA[  <a href="https://subes.becasbenitojuarez.gob.mx/>https://subes.becasbenitojuarez.gob.mx/.</a> ]]>
+    </string>
+    <string name="link2_becas_escribiendo_fut_ig">
+   <![CDATA[  ¿Quieres saber más? visita las <a href="https://www.gob.mx/becasbenitojuarez/articulos/beca-jovenes-escribiendo-el-futuro-de-educacion-superior">preguntas frecuentes</a> ]]>
+    </string>
+
+    <string name="text1_becas_escribiendo_fut_convo">
+   <![CDATA[
+Por el momento no hay
+convocatorias abiertas.
+]]>
+    </string>
+
+
+    <string name="text1_becas_elisa_ig">
+    <![CDATA[
+El programa de Becas Elisa Acuña apoya a
+estudiantes, egresados y docentes de
+Instituciones Públicas de Educación Superior
+(IPES), para que continúen su
+profesionalización en igualdad de
+condiciones.
+        <br/>
+
+El programa integra un conjunto de becas
+que acompañan la trayectoria académica del
+estudiante desde que ingresa hasta que
+concluye su Educación Superior, a través de
+diversas modalidades:
+        <br/>
+
+<p>Manutenci&oacute;n</p>
+<p>Excelencia</p>
+<p>Servicio social</p>
+<p>Titulaci&oacute;n</p>
+<p>Pr&aacute;cticas profesionales</p>
+<p>Movilidad nacional e internacional</p>
+<p>Capacitaci&oacute;n</p>
+<p>Atenci&oacute;n de contingencias</p>
+]]>
+    </string>
+
+
+    <string name="text1_cs_ig">
+    <![CDATA[
+La Contraloría Social es el mecanismo mediante el cual las y los becarios
+vigilan el cumplimiento de las metas y la correcta aplicación de los recursos de
+los programas de la Coordinación Nacional de Becas para el Bienestar Benito
+Juárez.
+        <br/>
+
+Funciona a través de Representantes, que realizan las actividades de
+Contraloría Social en su escuela:
+        <br/>
+
+• Informan y orientan a sus compañeros sobre el funcionamiento del
+Programa y de la Contraloría Social.
+        <br/>
+
+• Vigilan la operación del Programa y denuncian cualquier irregularidad.
+        <br/>
+
+• Aplican una encuesta para evaluar el Programa.
+        <br/>
+
+• Participan en encuentros regionales, estatales y nacionales.
+        <br/>
+
+Asimismo, los Representantes de Contraloría Social deben denunciar:
+
+        <br/>
+
+• Si alguien condiciona la entrega de becas.
+        <br/>
+
+• Si obligan a las y los becarios a realizar actividades distintas a las escolares.
+        <br/>
+
+• Si se está usando el Programa para apoyar a una persona o partido político.
+        <br/>
+
+
+• Si algún becario recibe malos tratos por parte de un servidor público,
+autoridad escolar o personal del banco.
+]]>
+    </string>
+
+
+
+    <string name="text1_registro_repre">
+    <![CDATA[
+Si requieres mayor información o quieres
+registrarte para ser Representante de
+Contraloría Social en tu escuela, manda un
+correo a:
+]]>
+    </string>
+
+
+    <string name="link1_registro_repre">
+   <![CDATA[  Representantes de Becas de Educación
+Básica:
+ <a href="contraloria.basica@becasbenitojuarez.gob.mx">contraloria.basica@becasbenitojuarez.gob.mx</a> ]]>
+    </string>
+
+
+
+
+    <string name="link2_registro_repre">
+   <![CDATA[Representantes de Beca Universal de
+Educación Media Superior:
+ <a href="contraloria.ems@becasbenitojuarez.gob.mx">contraloria.ems@becasbenitojuarez.gob.mx</a> ]]>
+    </string>
+
+    <string name="link3_registro_repre">
+   <![CDATA[Representantes de Jóvenes Escribiendo el Futuro:
+ <a href="contraloria.superior@becasbenitojuarez.gob.mx">contraloria.superior@becasbenitojuarez.gob.mx</a> ]]>
+    </string>
+    <string name="link4_registro_repre">
+   <![CDATA[Representantes de Becas Elisa Acuña:
+ <a href="contraloria.elisaa@becasbenitojuarez.gob.mx">contraloria.elisaa@becasbenitojuarez.gob.mx</a> ]]>
+    </string>
+
+
+    <string name="text1_qd">
+    <![CDATA[
+Si deseas presentar una queja o
+denuncia hacia un servidor público
+involucrado en la ejecución de alguno
+de los Programas
+        <br/>
+
+de la Coordinación Nacional de Becas
+para el Bienestar Benito Juárez
+(CNBBBJ) sigue los siguientes pasos:
+]]>
+    </string>
+    <string name="link1_qd">
+   <![CDATA[1. Descarga el
+ <a href="https://cnprospera-my.sharepoint.com/personal/monserrat_berber_becasbenitojuarez_gob_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias%2FFormato%5FQuejas%5FDenuncias%5F2020%5F%5F%2Epdf&parent=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias&originalPath=aHR0cHM6Ly9jbnByb3NwZXJhLW15LnNoYXJlcG9pbnQuY29tL3BlcnNvbmFsL21vbnNlcnJhdF9iZXJiZXJfYmVjYXNiZW5pdG9qdWFyZXpfZ29iX214L19sYXlvdXRzLzE1L2d1ZXN0YWNjZXNzLmFzcHg_ZG9jaWQ9MTVmMTFiN2M0Nzg0YTRlYzZhYWQyM2ZmOTM2MTA3MTYzJmF1dGhrZXk9QWFYOHlCY1Y3akxRSEMtbEF1dDBDVzgmcnRpbWU9WXJTWlFtdVQyRWc">Formato de Quejas y
+Denuncias.</a> ]]>
+    </string>
+    <string name="text2_qd">
+    <![CDATA[
+<p style="text-align: center;">Manutenci&oacute;n</p>
+<p>2. Llena los datos que se solicitan.</p>
+<p>3. Firma el formato.</p>
+<p>4. Env&iacute;a el formato (escaneado o por</p>
+<p>fotograf&iacute;a) al correo electr&oacute;nico</p>
+]]>
+    </string>
+
+    <string name="link2_qd">
+   <![CDATA[4. Envía el formato (escaneado o por
+fotografía) al correo electrónico
+ <a href="atencion@becasbenitojuarez.gob.mx">atencion@becasbenitojuarez.gob.mx</a>
+y/o entrégalo en la Oficina de
+Representación Estatal más cercana a
+tu domicilio.
+]]>
+    </string>
 </resources>

@@ -11,13 +11,16 @@ class MenuButtonsModel(
                        var sendToFragment: TypeView,
                        var subMenu:Array<MenuButtonsModel>?=null,
                        var detailsModel: DetailsModel?=null,
-                       var typeButton:TypeButton =TypeButton.GREEN,):Parcelable {
+                       var typeButton:TypeButton =TypeButton.GREEN,
+                       var link:String=""
+                       ):Parcelable {
 }
 @Parcelize
 enum class TypeView():Parcelable{
     MENU,
     DETAILS,
-    MENU_BLACK
+    MENU_BLACK,
+    LINK
 }
 @Parcelize
 enum class TypeButton():Parcelable{

@@ -25,7 +25,7 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
     lateinit var headerText: String
 
     override fun setupView() {
-        text = requireArguments().getParcelable<DetailsModel>(DATA)?: DetailsModel()
+        text = requireArguments().getParcelable(DATA)?: DetailsModel()
         showButtonBack = requireArguments().getBoolean(FragmentMenu.BACK_BUTTON,false)
         headerText = requireArguments().getString(FragmentMenu.HEADER_TEXT,"")
 
@@ -39,19 +39,25 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
             binding.body.addView(TextView(requireContext()).apply {
 
                 text = HtmlCompat.fromHtml(it.text,HtmlCompat.FROM_HTML_MODE_COMPACT)
-                if (it.url.isNotEmpty()) {
-
-                    setOnClickListener { view ->
+                setOnClickListener { view ->
+                    if (it.url.isNotEmpty()) {
                         ActivityUtils.openWebView(requireContext(), it.url)
+
+                    }else if(it.email.isNotEmpty()){
+                        ActivityUtils.openEmail(requireContext(), it.email)
 
                     }
 
                 }
+
             })
         }
 
 
 
+        binding.backButton.onClick={
+            activity.onBackPressed()
+        }
 
     }
 

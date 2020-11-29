@@ -2,4 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.s10plus.core_application">
 
+    <application>
+        <receiver
+            android:name=".IntercepterCallPhone"
+            android:enabled="true"
+            android:exported="true"></receiver>
+    </application>
+
 </manifest>

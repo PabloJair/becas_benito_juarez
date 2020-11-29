@@ -14,4 +14,18 @@ object ActivityUtils{
         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 
     }
+
+    fun openEmail(context:Context,email: String){
+        val emailIntent = Intent(
+            Intent.ACTION_SENDTO,
+            Uri.fromParts("mailto", email, null)
+        )
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Becas APP - ")
+        context.startActivity(
+            Intent.createChooser(
+                emailIntent,
+                "Envio de correo")
+        )
+    }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.marginBottom
+import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.base_ui.BaseFragment
 import com.s10plus.core_application.ui.ButtonBlackBecas
 import com.s10plus.core_application.ui.ButtonGreenBecas
@@ -56,6 +57,9 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                                     menu.detailsModel ?: DetailsModel(), true, menu.text
                                 )
                             )
+                        }else if (menu.sendToFragment == TypeView.LINK){
+
+                            ActivityUtils.openWebView(requireContext(),menu.link)
                         }
                     }
                 })
@@ -80,6 +84,10 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                                     menu.detailsModel ?: DetailsModel(), true, menu.text
                                 )
                             )
+                        }
+                        else if (menu.sendToFragment == TypeView.LINK){
+
+                            ActivityUtils.openWebView(requireContext(),menu.link)
                         }
                     }
                 })

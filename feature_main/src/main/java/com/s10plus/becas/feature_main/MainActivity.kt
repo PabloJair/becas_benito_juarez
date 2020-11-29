@@ -1,5 +1,6 @@
 package com.s10plus.becas.feature_main
 
+import android.media.MediaPlayer
 import androidx.lifecycle.Observer
 import com.s10plus.becas.feature_main.databinding.ActivityMainViewBinding
 import com.s10plus.becas.feature_main.di.injectFeature
@@ -20,6 +21,9 @@ class MainActivity: BaseActivity<ActivityMainViewBinding>(R.layout.activity_main
     }
 
     override fun setupView() {
+
+        val mp = MediaPlayer.create(this, R.raw.intro)
+        mp.start()
 
 
     }
