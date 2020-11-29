@@ -25,7 +25,7 @@ class IntercepterCallPhone : BroadcastReceiver() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val telecomManager = context.getSystemService(Context.TELECOM_SERVICE) as TelecomManager
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ANSWER_PHONE_CALLS) == PackageManager.PERMISSION_GRANTED) {
-                telecomManager.endCall()
+                //telecomManager.endCall()
                 return true
             }
             return false
