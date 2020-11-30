@@ -14,5 +14,7 @@
     <string name="fcm_message">FCM Message</string>
     <string name="validate_message_error">Campo Requerido</string>
     <string name="validate_message_error_email">Se necesita un correo valido</string>
-    <string name="facebook_app_id">1078745835899742</string> <string name="fb_login_protocol_scheme">fb1078745835899742</string>
+<!--    <string name="facebook_app_id">1078745835899742</string> <string name="fb_login_protocol_scheme">fb1078745835899742</string>-->
+    <string name="facebook_app_id">846411186189008</string>
+    <string name="fb_login_protocol_scheme">fb846411186189008</string>
 </resources>
