@@ -12,11 +12,12 @@ import androidx.core.content.ContextCompat
 
 import com.s10plus.core_application.R
 import com.s10plus.core_application.databinding.ButtonGreenBinding
+import com.s10plus.core_application.databinding.ButtonNsBinding
 
 
-class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearLayout(context, attrs){
+class ButtonNSBecas(context: Context, var attrs: AttributeSet?=null): LinearLayout(context, attrs){
 
-    val binding:ButtonGreenBinding  = ButtonGreenBinding.inflate(LayoutInflater.from(context),this,true)
+    private val binding:ButtonNsBinding  = ButtonNsBinding.inflate(LayoutInflater.from(context),this,true)
 
     var text = binding.text.text!!
     set(value) {
@@ -35,8 +36,8 @@ class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearL
             binding.image.visibility = if(field) View.VISIBLE else View.GONE
         }
 
-    var onClick:((view: View)->Unit)?=null
-
+    var onClick:((ns: NetworkSocial)->Unit)?=null
+    var onClickVisibility:((view:View)->Unit)?=null
     init {
         try {
 
@@ -48,12 +49,19 @@ class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearL
                     val referenceImg = getResourceId(R.styleable.green_button_attributes_image_button,R.drawable.ic_menu_gallery)
                     text =getText(R.styleable.green_button_attributes_text_button)?:""
                     binding.image.setImageResource(referenceImg)
-                    binding.rootView.background=ContextCompat.getDrawable(context,R.drawable.drawable_button)
+                    binding.rootView.background=ContextCompat.getDrawable(context,R.drawable.button_ligth_blue)
                     binding.text.setTextColor(Color.WHITE)
                     binding.rootView.setOnClickListener {
 
-                        onClick?.invoke(it)
+
+                        binding.rs.visibility = if(binding.rs.visibility == GONE) VISIBLE else GONE
+                        onClickVisibility?.invoke(binding.rs)
                     }
+
+                    binding.facebook.setOnClickListener { onClick?.invoke(NetworkSocial.facebook) }
+                    binding.twitter.setOnClickListener { onClick?.invoke(NetworkSocial.twitter) }
+                    binding.youtube.setOnClickListener { onClick?.invoke(NetworkSocial.youtube) }
+
                     recycle()
 
                 }
@@ -61,11 +69,15 @@ class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearL
         }catch (e:Exception){}
     }
 
+    enum class NetworkSocial{
+        youtube,facebook,twitter
+    }
     companion object {
 
-        fun instance(context: Context,model:Any):ButtonGreenBecas{
+        fun instance(context: Context,model:Any):ButtonNSBecas{
 
-            return ButtonGreenBecas(context).apply {
+            return ButtonNSBecas(context).apply {
+
 
 
                 this.model=model

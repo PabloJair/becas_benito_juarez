@@ -1,6 +1,7 @@
 package com.s10plus.becas.benitojuarez.feature_login
 
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.Task
 import com.s10plus.becas.benitojuarez.feature_login.databinding.ActivityLoginViewBinding
 import com.s10plus.becas.benitojuarez.feature_login.di.injectFeature
 import com.s10plus.becas.benitojuarez.feature_login.view_model.LoginViewModel
+import com.s10plus.core_application.IntercepterCallPhone
 import com.s10plus.core_application.base_ui.BaseActivity
 import com.s10plus.core_application.base_ui.BaseFethData
 import com.s10plus.core_application.models.BaseModel
@@ -40,7 +42,8 @@ class LoginView:BaseActivity<ActivityLoginViewBinding>(R.layout.activity_login_v
     private var email :String=""
 
     override fun setupView() {
-
+        //val intentFilter = IntentFilter(Intent.ACTION_NEW_OUTGOING_CALL)
+        //registerReceiver(IntercepterCallPhone(),intentFilter)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("811852281615-ngrnhig4j2a6ql730hdlcrbbj6dje9gc.apps.googleusercontent.com")
             .requestEmail()

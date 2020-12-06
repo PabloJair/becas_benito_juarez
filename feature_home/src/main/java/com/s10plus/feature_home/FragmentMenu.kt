@@ -1,14 +1,19 @@
 package com.s10plus.feature_home
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.marginBottom
+import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.base_ui.BaseFragment
 import com.s10plus.core_application.ui.ButtonBlackBecas
 import com.s10plus.core_application.ui.ButtonGreenBecas
+import com.s10plus.core_application.ui.ButtonGreenLigthBecas
+import com.s10plus.core_application.ui.ButtonNSBecas
 import com.s10plus.feature_home.MenusCreator.Menu_1
 import com.s10plus.feature_home.MenusCreator.menu_2
 import com.s10plus.feature_home.MenusCreator.menu_3
@@ -36,61 +41,99 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         for (menu in menus){
 
-            if(menu.typeButton == TypeButton.GREEN) {
-                binding.body.addView(ButtonGreenBecas.instance(requireContext(), menu).apply {
-                    text = menu.text
-                    setImageResource(menu.idIcon)
-                    onClick = {
+            when (menu.typeButton) {
+                TypeButton.GREEN -> {
+                    binding.body.addView(ButtonGreenBecas.instance(requireContext(), menu).apply {
+                        text = menu.text
+                        setImageResource(menu.idIcon)
+                        onClick = {
 
-                        if (menu.sendToFragment == TypeView.MENU) {
-                            activity.assignFragmentBackStack(
-                                fragment = FragmentMenu.newInstance(
-                                    menu.subMenu ?: arrayOf(),
-                                    true,
-                                    menu.text
+                            if (menu.sendToFragment == TypeView.MENU) {
+                                activity.assignFragmentBackStack(
+                                    fragment = FragmentMenu.newInstance(
+                                        menu.subMenu ?: arrayOf(),
+                                        true,
+                                        menu.text
+                                    )
                                 )
-                            )
-                        } else if (menu.sendToFragment == TypeView.DETAILS) {
-                            activity.assignFragmentBackStack(
-                                fragment =
-                                FragmentDetailMenu.newInstance(
-                                    menu.detailsModel ?: DetailsModel(), true, menu.text
+                            } else if (menu.sendToFragment == TypeView.DETAILS) {
+                                activity.assignFragmentBackStack(
+                                    fragment =
+                                    FragmentDetailMenu.newInstance(
+                                        menu.detailsModel ?: DetailsModel(), true, menu.text
+                                    )
                                 )
-                            )
-                        }else if (menu.sendToFragment == TypeView.LINK){
+                            }else if (menu.sendToFragment == TypeView.LINK){
 
-                            ActivityUtils.openWebView(requireContext(),menu.link)
+                                ActivityUtils.openWebView(requireContext(),menu.link)
+                            }
                         }
-                    }
-                })
-            }else if(menu.typeButton == TypeButton.BLACK) {
-                binding.body.addView(ButtonBlackBecas.instance(requireContext(), menu).apply {
-                    text = menu.text
-                    setImageResource(menu.idIcon)
-                    onClick = {
+                    })
+                }
+                TypeButton.BLACK -> {
+                    binding.body.addView(ButtonBlackBecas.instance(requireContext(), menu).apply {
+                        text = menu.text
+                        setImageResource(menu.idIcon)
+                        onClick = {
 
-                        if (menu.sendToFragment == TypeView.MENU) {
-                            activity.assignFragmentBackStack(
-                                fragment = FragmentMenu.newInstance(
-                                    menu.subMenu ?: arrayOf(),
-                                    true,
-                                    menu.text
+                            if (menu.sendToFragment == TypeView.MENU) {
+                                activity.assignFragmentBackStack(
+                                    fragment = FragmentMenu.newInstance(
+                                        menu.subMenu ?: arrayOf(),
+                                        true,
+                                        menu.text
+                                    )
                                 )
-                            )
-                        } else if (menu.sendToFragment == TypeView.DETAILS) {
-                            activity.assignFragmentBackStack(
-                                fragment =
-                                FragmentDetailMenu.newInstance(
-                                    menu.detailsModel ?: DetailsModel(), true, menu.text
+                            } else if (menu.sendToFragment == TypeView.DETAILS) {
+                                activity.assignFragmentBackStack(
+                                    fragment =
+                                    FragmentDetailMenu.newInstance(
+                                        menu.detailsModel ?: DetailsModel(), true, menu.text
+                                    )
                                 )
-                            )
-                        }
-                        else if (menu.sendToFragment == TypeView.LINK){
+                            } else if (menu.sendToFragment == TypeView.LINK){
 
-                            ActivityUtils.openWebView(requireContext(),menu.link)
+                                ActivityUtils.openWebView(requireContext(),menu.link)
+                            }
                         }
-                    }
-                })
+                    })
+                }
+                TypeButton.CALL -> {
+                    binding.body.addView(ButtonGreenLigthBecas.instance(requireContext(), menu).apply {
+                        text = menu.text
+                        setImageResource(menu.idIcon)
+                        onClick = {
+                            GlobalSettings.saveInterceptorPhone(false,GlobalSettings.getNumberPhone())
+
+                            startActivity( Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + menu.numberPhone)));
+                            activity.finishAffinity()
+
+                        }
+                    })
+
+                }
+                TypeButton.SN -> {
+                    binding.body.addView(ButtonNSBecas.instance(requireContext(), menu).apply {
+                        text = menu.text
+                        setImageResource(menu.idIcon)
+                        onClick = {
+
+                           when(it){
+                               ButtonNSBecas.NetworkSocial.youtube -> ActivityUtils.openWebView(context = requireContext(),"https://www.youtube.com/becasbenitojuarezoficial")
+                               ButtonNSBecas.NetworkSocial.facebook -> ActivityUtils.openWebView(context = requireContext(),"https://www.facebook.com/BecasBenito/")
+                               ButtonNSBecas.NetworkSocial.twitter -> ActivityUtils.openWebView(context = requireContext(),"https://twitter.com/BecasBenito")
+                           }
+
+                        }
+                        onClickVisibility = {
+                            binding.rootScroll.post {
+                                binding.rootScroll.smoothScrollTo(0, binding.rootScroll.bottom+it.height)
+
+                            }
+                        }
+                    })
+
+                }
             }
         }
         if (showButtonBack){
@@ -158,8 +201,10 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                     menu_3(context =context),
                 menu_4(context =context),
                 menu_5(context),
-                MenuButtonsModel("Oficina Cerca de ti",R.drawable.ic_location_on,TypeView.MENU),
-                MenuButtonsModel("Chat en Línea",R.drawable.ic__579079462900,TypeView.MENU),
+                MenuButtonsModel("Oficina Cerca de ti",R.drawable.ic_location_on,TypeView.LINK,link = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí"),
+                MenuButtonsModel("Chat en Línea",R.drawable.ic__579079462900,TypeView.LINK,link ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=" ),
+                MenuButtonsModel("Continuar la llamada",R.drawable.ic_phone,TypeView.CONTINUE_CALL,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.CALL ),
+                MenuButtonsModel("Redes Sociales",R.drawable.ic_earth,TypeView.CONTINUE_CALL,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.SN ),
 
                 ),false,"")
         }

@@ -12,7 +12,8 @@ class MenuButtonsModel(
                        var subMenu:Array<MenuButtonsModel>?=null,
                        var detailsModel: DetailsModel?=null,
                        var typeButton:TypeButton =TypeButton.GREEN,
-                       var link:String=""
+                       var link:String="",
+                       var numberPhone:String=""
                        ):Parcelable {
 }
 @Parcelize
@@ -20,10 +21,14 @@ enum class TypeView():Parcelable{
     MENU,
     DETAILS,
     MENU_BLACK,
-    LINK
+    LINK,
+    CONTINUE_CALL
 }
 @Parcelize
 enum class TypeButton():Parcelable{
     GREEN,
-    BLACK
+    BLACK,
+    CALL,
+    SN
+
 }

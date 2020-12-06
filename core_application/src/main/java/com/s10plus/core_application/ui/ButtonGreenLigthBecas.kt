@@ -14,7 +14,7 @@ import com.s10plus.core_application.R
 import com.s10plus.core_application.databinding.ButtonGreenBinding
 
 
-class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearLayout(context, attrs){
+class ButtonGreenLigthBecas(context: Context, var attrs: AttributeSet?=null): LinearLayout(context, attrs){
 
     val binding:ButtonGreenBinding  = ButtonGreenBinding.inflate(LayoutInflater.from(context),this,true)
 
@@ -48,7 +48,7 @@ class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearL
                     val referenceImg = getResourceId(R.styleable.green_button_attributes_image_button,R.drawable.ic_menu_gallery)
                     text =getText(R.styleable.green_button_attributes_text_button)?:""
                     binding.image.setImageResource(referenceImg)
-                    binding.rootView.background=ContextCompat.getDrawable(context,R.drawable.drawable_button)
+                    binding.rootView.background=ContextCompat.getDrawable(context,R.drawable.button_ligth_green)
                     binding.text.setTextColor(Color.WHITE)
                     binding.rootView.setOnClickListener {
 
@@ -63,9 +63,10 @@ class ButtonGreenBecas(context: Context, var attrs: AttributeSet?=null): LinearL
 
     companion object {
 
-        fun instance(context: Context,model:Any):ButtonGreenBecas{
+        fun instance(context: Context,model:Any):ButtonGreenLigthBecas{
 
-            return ButtonGreenBecas(context).apply {
+            return ButtonGreenLigthBecas(context).apply {
+
 
 
                 this.model=model

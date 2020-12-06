@@ -16,6 +16,8 @@
             app:layout_constraintBottom_toTopOf="@+id/footerLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="blocksDescendants"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -42,6 +44,7 @@
 
                 <LinearLayout
                     android:id="@+id/body"
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -79,7 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                app:image_button="@drawable/ic__579079462900"
+                app:image_button="@drawable/ic_back"
                 app:text_button="Menú principal" />
 
 
