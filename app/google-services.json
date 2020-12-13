@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "522352529052",
-    "firebase_url": "https://myapplication-d0787.firebaseio.com",
-    "project_id": "myapplication-d0787",
-    "storage_bucket": "myapplication-d0787.appspot.com"
+    "project_number": "199670885175",
+    "project_id": "becasbenitojuarezdemo",
+    "storage_bucket": "becasbenitojuarezdemo.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:522352529052:android:4110850fbfb57e42eda759",
+        "mobilesdk_app_id": "1:199670885175:android:59407c660b473e3a4608b2",
         "android_client_info": {
-          "package_name": "com.s10plus.corporate_messenger"
+          "package_name": "com.s10plus.becas.benitojuarez"
         }
       },
       "oauth_client": [
         {
-          "client_id": "522352529052-jp3qghbkqe3fr3ote23ujgpefp1d39rf.apps.googleusercontent.com",
+          "client_id": "199670885175-jdn6rpj4ndhkhln38eo6e26jlhif65g4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCK307pCIht8JC1uJqmHGmSbBELvjT6Jd4"
+          "current_key": "AIzaSyC2L27nrhhHvpTuNtfUwcUtJ3dyGCFTKpg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "522352529052-jp3qghbkqe3fr3ote23ujgpefp1d39rf.apps.googleusercontent.com",
+              "client_id": "199670885175-jdn6rpj4ndhkhln38eo6e26jlhif65g4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

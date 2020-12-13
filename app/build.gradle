@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 apply from: "$rootDir/common-kotlin.gradle"
 apply from: "$rootDir/common-compile.gradle"
-//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android{
     defaultConfig {

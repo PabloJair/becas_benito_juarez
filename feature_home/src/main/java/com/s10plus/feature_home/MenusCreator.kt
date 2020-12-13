@@ -38,7 +38,7 @@ object MenusCreator {
                 subMenu = menu_2_subMenu_2(context),
                 typeButton = TypeButton.BLACK)
             )
-        return MenuButtonsModel("Becas de Educación Media Superios",R.drawable.ic__595833450197,TypeView.MENU,submenu,detailsModel = null,TypeButton.GREEN
+        return MenuButtonsModel("Becas de Educación Media Superior",R.drawable.ic__595833450197,TypeView.MENU,submenu,detailsModel = null,TypeButton.GREEN
         )
 
     }

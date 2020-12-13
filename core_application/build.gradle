@@ -6,7 +6,6 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -56,14 +55,22 @@ dependencies {
 
     api 'com.google.code.gson:gson:2.8.6'
     api 'com.blankj:utilcodex:1.29.0'
-
-    //api 'com.google.firebase:firebase-analytics:17.6.0'
-    //api 'com.google.firebase:firebase-messaging:20.3.0'
-
     api 'de.hdodenhof:circleimageview:3.1.0'
     api "io.reactivex.rxjava3:rxjava:3.0.4"
     api 'com.github.tbruyelle:rxpermissions:0.12'
 
     api 'com.facebook.android:facebook-login:5.15.3'
+
+
+    api 'com.google.firebase:firebase-analytics:18.0.0'
+    api 'com.google.firebase:firebase-messaging:21.0.0'
+
+    // Import the BoM for the Firebase platform
+    api platform('com.google.firebase:firebase-bom:25.12.0')
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    api 'com.google.firebase:firebase-crashlytics-ktx'
+    api 'com.google.firebase:firebase-analytics-ktx'
 
 }
