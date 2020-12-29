@@ -1,6 +1,8 @@
 package com.s10plus.feature_home.models
 
 import android.os.Parcelable
+import com.google.gson.annotations.Expose
+import com.s10plus.feature_home.MenusCreator
 import kotlinx.android.parcel.Parcelize
 import retrofit2.http.Header
 
@@ -8,4 +10,7 @@ import retrofit2.http.Header
 class DetailsModel(vararg var texts:TextDetailModel):Parcelable
 @Parcelize
 
-class TextDetailModel(var text:String, var url:String="",var email:String=""):Parcelable
+class TextDetailModel(    @Expose(serialize = false) var text:String,    @Expose(serialize = false) var url:String="", @Expose(serialize = false) var email:String="",
+                      var id:Int=++MenusCreator.idCont,
+                      var moreInformation:String= if(url.isNotEmpty()) "CLICK/URL: $url" else "CLICK/SEND-EMAIL: $email"
+):Parcelable

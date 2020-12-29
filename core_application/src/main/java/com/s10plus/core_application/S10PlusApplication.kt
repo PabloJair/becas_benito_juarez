@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.blankj.utilcode.util.LogUtils
 import com.facebook.FacebookActivity
 import com.facebook.FacebookSdk
@@ -25,6 +26,7 @@ class S10PlusApplication: Application(),LifecycleObserver {
 
         currentApplication = this
 
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
 
         startKoin {
             // declare used Android context
@@ -43,12 +45,16 @@ class S10PlusApplication: Application(),LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onAppDestroyed(){
-        GlobalSettings.saveInterceptorPhone(true,GlobalSettings.PHONE_1)
+        GlobalSettings.saveInterceptorPhone(true,GlobalSettings.getNumberPhone())
+        //Toast.makeText(this, "Destruyo la app", Toast.LENGTH_LONG).show()
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onAppStoped(){
-        GlobalSettings.saveInterceptorPhone(true,GlobalSettings.PHONE_1)
+        GlobalSettings.saveInterceptorPhone(true,GlobalSettings.getNumberPhone())
+        //Toast.makeText(this, "Stop la app", Toast.LENGTH_LONG).show()
+
     }
 
 

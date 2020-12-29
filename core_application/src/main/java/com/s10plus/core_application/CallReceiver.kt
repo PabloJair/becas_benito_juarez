@@ -16,16 +16,17 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SPUtils
+import com.s10plus.core_application.utils.Device
 import java.util.*
 
 class CallReceiver:PhoneCallReceiver() {
 
     override fun onOutgoingCallStarted(ctx: Context?, number: String?, start: Date?) {
         super.onOutgoingCallStarted(ctx, number, start)
-        Toast.makeText(ctx, number, Toast.LENGTH_LONG).show()
         if(number ==GlobalSettings.PHONE_1 || number==  GlobalSettings.PHONE_2){
             if(GlobalSettings.getInterceptorPhone()) {
-                openApp(ctx!!, "com.s10plus.becas.benitojuarez")
+                GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
+                openApp(ctx, "com.s10plus.becas.benitojuarez")
                 endCall(ctx)
             }else
                 GlobalSettings.saveInterceptorPhone(true, number)

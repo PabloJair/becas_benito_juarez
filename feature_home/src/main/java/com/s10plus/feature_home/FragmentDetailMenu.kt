@@ -8,8 +8,10 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.core.view.forEach
+import com.s10plus.core_application.analytics.AnalyticsViewModel
 import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.base_ui.BaseFragment
+import com.s10plus.core_application.base_ui.BaseViewModel
 import com.s10plus.feature_home.Url.BEB_2
 import com.s10plus.feature_home.databinding.FragmentBebBinding
 import com.s10plus.feature_home.models.DetailsModel
@@ -23,6 +25,7 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
     lateinit var text:DetailsModel
     var showButtonBack by Delegates.notNull<Boolean>()
     lateinit var headerText: String
+    lateinit var analyticsViewModel: AnalyticsViewModel
 
     override fun setupView() {
         text = requireArguments().getParcelable(DATA)?: DetailsModel()
@@ -41,12 +44,18 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
                 text = HtmlCompat.fromHtml(it.text,HtmlCompat.FROM_HTML_MODE_COMPACT)
                 setOnClickListener { view ->
                     if (it.url.isNotEmpty()) {
+                        analyticsViewModel.sendClicks(it.id,it.moreInformation)
+
                         ActivityUtils.openWebView(requireContext(), it.url)
 
                     }else if(it.email.isNotEmpty()){
                         ActivityUtils.openEmail(requireContext(), it.email)
 
                     }
+
+
+                    analyticsViewModel.sendClicks(it.id,it.moreInformation)
+
 
                 }
 
@@ -65,6 +74,7 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
     }
 
     override fun setupViewModel() {
+        analyticsViewModel = BaseViewModel.getViewModel(this,AnalyticsViewModel::class.java)
     }
 
     override fun init() {

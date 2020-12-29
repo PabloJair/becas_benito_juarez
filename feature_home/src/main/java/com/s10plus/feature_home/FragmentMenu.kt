@@ -4,12 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.marginBottom
+import androidx.lifecycle.ViewModelProvider
+import com.blankj.utilcode.util.GsonUtils
+import com.blankj.utilcode.util.LogUtils
 import com.s10plus.core_application.GlobalSettings
+import com.s10plus.core_application.analytics.AnalyticsViewModel
 import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.base_ui.BaseFragment
+import com.s10plus.core_application.base_ui.BaseViewModel
 import com.s10plus.core_application.ui.ButtonBlackBecas
 import com.s10plus.core_application.ui.ButtonGreenBecas
 import com.s10plus.core_application.ui.ButtonGreenLigthBecas
@@ -34,6 +40,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
      var showButtonBack by Delegates.notNull<Boolean>()
     lateinit var headerText: String
 
+    lateinit var analyticsViewModel: AnalyticsViewModel
     override fun setupView() {
         menus = (requireArguments().getParcelableArray(DATA)?:throw Exception("Sin Menus ")) as Array<MenuButtonsModel>
         showButtonBack = requireArguments().getBoolean(BACK_BUTTON,false)
@@ -48,25 +55,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         setImageResource(menu.idIcon)
                         onClick = {
 
-                            if (menu.sendToFragment == TypeView.MENU) {
-                                activity.assignFragmentBackStack(
-                                    fragment = FragmentMenu.newInstance(
-                                        menu.subMenu ?: arrayOf(),
-                                        true,
-                                        menu.text
-                                    )
-                                )
-                            } else if (menu.sendToFragment == TypeView.DETAILS) {
-                                activity.assignFragmentBackStack(
-                                    fragment =
-                                    FragmentDetailMenu.newInstance(
-                                        menu.detailsModel ?: DetailsModel(), true, menu.text
-                                    )
-                                )
-                            }else if (menu.sendToFragment == TypeView.LINK){
-
-                                ActivityUtils.openWebView(requireContext(),menu.link)
-                            }
+                           this@FragmentMenu.onClick(menu)
                         }
                     })
                 }
@@ -76,25 +65,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         setImageResource(menu.idIcon)
                         onClick = {
 
-                            if (menu.sendToFragment == TypeView.MENU) {
-                                activity.assignFragmentBackStack(
-                                    fragment = FragmentMenu.newInstance(
-                                        menu.subMenu ?: arrayOf(),
-                                        true,
-                                        menu.text
-                                    )
-                                )
-                            } else if (menu.sendToFragment == TypeView.DETAILS) {
-                                activity.assignFragmentBackStack(
-                                    fragment =
-                                    FragmentDetailMenu.newInstance(
-                                        menu.detailsModel ?: DetailsModel(), true, menu.text
-                                    )
-                                )
-                            } else if (menu.sendToFragment == TypeView.LINK){
-
-                                ActivityUtils.openWebView(requireContext(),menu.link)
-                            }
+                          this@FragmentMenu.onClick(menu)
                         }
                     })
                 }
@@ -103,6 +74,8 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         text = menu.text
                         setImageResource(menu.idIcon)
                         onClick = {
+                            analyticsViewModel.sendClicks(menu.id,menu.otherInformation)
+
                             GlobalSettings.saveInterceptorPhone(false,GlobalSettings.getNumberPhone())
 
                             startActivity( Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + menu.numberPhone)));
@@ -119,9 +92,21 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         onClick = {
 
                            when(it){
-                               ButtonNSBecas.NetworkSocial.youtube -> ActivityUtils.openWebView(context = requireContext(),"https://www.youtube.com/becasbenitojuarezoficial")
-                               ButtonNSBecas.NetworkSocial.facebook -> ActivityUtils.openWebView(context = requireContext(),"https://www.facebook.com/BecasBenito/")
-                               ButtonNSBecas.NetworkSocial.twitter -> ActivityUtils.openWebView(context = requireContext(),"https://twitter.com/BecasBenito")
+                               ButtonNSBecas.NetworkSocial.youtube -> {
+                                   analyticsViewModel.sendClicks(menu.id,menu.otherInformation+"YOUTUBE")
+
+                                   ActivityUtils.openWebView(context = requireContext(),"https://www.youtube.com/becasbenitojuarezoficial")
+                               }
+                               ButtonNSBecas.NetworkSocial.facebook -> {
+                                   analyticsViewModel.sendClicks(menu.id,menu.otherInformation+"FACEBOOK")
+
+                                   ActivityUtils.openWebView(context = requireContext(),"https://www.facebook.com/BecasBenito/")
+                               }
+                               ButtonNSBecas.NetworkSocial.twitter ->{
+                                   analyticsViewModel.sendClicks(menu.id,menu.otherInformation+"TWITTER")
+
+                                   ActivityUtils.openWebView(context = requireContext(),"https://twitter.com/BecasBenito")
+                               }
                            }
 
                         }
@@ -146,6 +131,10 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             binding.footer.visibility =View.VISIBLE
             Picasso.get().load("https://gs.s10plus.com/images/logo_banner.jpeg").placeholder(R.drawable.sep).into(binding.footer)
 
+            binding.footer.setOnClickListener {
+                ActivityUtils.openWebView(requireContext(),"https://www.gob.mx/sep")
+
+            }
         }
 
 
@@ -168,10 +157,45 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
 
+    fun onClick(menu:MenuButtonsModel){
+        when (menu.sendToFragment) {
+            TypeView.MENU -> {
+                activity.assignFragmentBackStack(
+                    fragment = FragmentMenu.newInstance(
+                        menu.subMenu ?: arrayOf(),
+                        true,
+                        menu.text
+                    )
+                )
+            }
+            TypeView.DETAILS -> {
+                activity.assignFragmentBackStack(
+                    fragment =
+                    FragmentDetailMenu.newInstance(
+                        menu.detailsModel ?: DetailsModel(), true, menu.text
+                    )
+                )
+            }
+            TypeView.LINK -> {
+                ActivityUtils.openWebView(requireContext(),menu.link)
+            }
+            TypeView.WEBVIEW -> {
+                activity.assignFragmentBackStack(
+                    fragment =
+                    FragmentWebView.newInstance(menu.link)
+                )
+            }
+        }
+
+        analyticsViewModel.sendClicks(menu.id,menu.otherInformation)
+
+
+    }
     override fun setupObserver() {
     }
 
     override fun setupViewModel() {
+        analyticsViewModel =BaseViewModel.getViewModel(this,AnalyticsViewModel::class.java)
     }
 
     override fun init() {
@@ -189,12 +213,14 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             args.putBoolean(BACK_BUTTON, showButtonBack)
             args.putString(HEADER_TEXT, headerText)
 
+            //LogUtils.d(GsonUtils.toJson(menuButtonsModel))
             fragment.arguments = args
             return fragment
         }
 
         fun newInstanceMainMenu(context:Context): FragmentMenu {
 
+            MenusCreator.idCont =0;
             return newInstance(arrayOf((
                     Menu_1(context = context)),
                     menu_2(context = context),
@@ -202,9 +228,9 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 menu_4(context =context),
                 menu_5(context),
                 MenuButtonsModel("Oficina Cerca de ti",R.drawable.ic_location_on,TypeView.LINK,link = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí"),
-                MenuButtonsModel("Chat en Línea",R.drawable.ic__579079462900,TypeView.LINK,link ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=" ),
-                MenuButtonsModel("Continuar la llamada",R.drawable.ic_phone,TypeView.CONTINUE_CALL,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.CALL ),
-                MenuButtonsModel("Redes Sociales",R.drawable.ic_earth,TypeView.CONTINUE_CALL,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.SN ),
+                MenuButtonsModel("Chat en Línea",R.drawable.ic__579079462900,TypeView.WEBVIEW,link ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=" ),
+                MenuButtonsModel("Atención de un agente",R.drawable.ic_phone,TypeView.CONTINUE_CALL,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.CALL ),
+                MenuButtonsModel("Redes Sociales",R.drawable.ic_earth,TypeView.REDES_SOCIALES,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.SN ),
 
                 ),false,"")
         }

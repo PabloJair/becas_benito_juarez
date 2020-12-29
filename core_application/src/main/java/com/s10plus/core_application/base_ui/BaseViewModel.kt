@@ -1,8 +1,11 @@
 package com.s10plus.core_application.base_ui
 
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.s10plus.core_application.network.ClientRetrofit
 import com.s10plus.core_application.utils.SubscribeUtils
 import io.reactivex.Flowable
@@ -67,6 +70,18 @@ open class BaseViewModel:ViewModel() {
         super.onCleared()
 
         disposable.clear()
+    }
+
+    companion object{
+
+        fun<T:ViewModel> getViewModel(context: AppCompatActivity, viewModel:Class<T>):T{
+            return ViewModelProvider(context).get(viewModel)
+        }
+
+
+        fun<T:ViewModel> getViewModel(context: Fragment, viewModel:Class<T>):T{
+            return ViewModelProvider(context).get(viewModel)
+        }
     }
 
 }

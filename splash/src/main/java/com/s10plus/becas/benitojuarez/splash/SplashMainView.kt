@@ -2,20 +2,26 @@ package com.s10plus.becas.benitojuarez.splash
 
 import android.Manifest
 import android.Manifest.permission.*
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.os.Build
+import android.view.LayoutInflater
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import com.blankj.utilcode.util.LogUtils
 
 import com.s10plus.becas.benitojuarez.splash.databinding.ActivitySplashBinding
+import com.s10plus.becas.benitojuarez.splash.databinding.DialogPhoneBinding
 import com.s10plus.core_application.GlobalSettings
+import com.s10plus.core_application.S10PlusApplication
 import com.s10plus.core_application.base_ui.BaseActivity
 import com.s10plus.core_application.navigation.AppNavigation
 import com.s10plus.core_application.ui.dialog.TypeDialog
 import com.s10plus.core_application.utils.Constans
+import com.s10plus.core_application.utils.Device
 import com.tbruyelle.rxpermissions3.RxPermissions
 
 class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -25,16 +31,23 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
     var countPermission=2
     var showMessage = true
 
+    lateinit var viewNumber:DialogPhoneBinding;
+
     override fun setupView() {
 
 
+        viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this),null,false)
         rxPermissions.setLogging(true)
         GlobalSettings.saveInterceptorPhone(false)
         if(
             rxPermissions.isGranted(PROCESS_OUTGOING_CALLS)
             && rxPermissions.isGranted(READ_PHONE_STATE)
             && rxPermissions.isGranted(CALL_PHONE)
-            && rxPermissions.isGranted(ANSWER_PHONE_CALLS)){
+            && rxPermissions.isGranted(ANSWER_PHONE_CALLS)
+            && rxPermissions.isGranted(READ_SMS)
+            && rxPermissions.isGranted(READ_PHONE_NUMBERS)
+            && rxPermissions.isGranted(READ_PHONE_STATE)
+        ){
             executeApp()
             return
         }
@@ -56,7 +69,9 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             READ_PHONE_STATE,
             ANSWER_PHONE_CALLS,
             PROCESS_OUTGOING_CALLS,
-            CALL_PHONE
+            CALL_PHONE,
+            READ_SMS,
+            READ_PHONE_NUMBERS,
 
         ).subscribe {
             if (!it){
@@ -84,6 +99,44 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
 
     private fun executeApp(){
+
+        if(Device.getLineNumberPhone(S10PlusApplication.currentApplication).isEmpty()){
+
+            if(GlobalSettings.getCurrentPhone()==""){
+                val alert = AlertDialog.Builder(this).setView(viewNumber.root).show()
+                alert.setCancelable(false)
+
+                viewNumber.editText.addTextChangedListener {
+                        text ->
+
+                    viewNumber.ok.isEnabled = text!!.length>=10
+                }
+                viewNumber.cancel.setOnClickListener {
+                    finish()
+                }
+                viewNumber.ok.setOnClickListener {
+
+                    if(viewNumber.editText.text!!.toString().isNotEmpty()) {
+                        GlobalSettings.setCurrentPhone(viewNumber.editText.text!!.toString())
+                        alert.dismiss()
+
+                        if(GlobalSettings.validateSession())
+                            startActivity(AppNavigation.openMainView(this).apply {
+                                putExtra(Constans.DATA_EXTRAS, GlobalSettings.getUser())
+
+                            })
+                        else startActivity(AppNavigation.openMainView(this))
+                        finish()
+                    }
+
+                }
+                return
+            }
+
+
+
+        }
+
         AsyncTask.execute {
 
             Thread.sleep(5000)
@@ -94,7 +147,7 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
                         putExtra(Constans.DATA_EXTRAS, GlobalSettings.getUser())
 
                     })
-                else startActivity(AppNavigation.openLogin(this))
+                else startActivity(AppNavigation.openMainView(this))
                 finish()
             }
 

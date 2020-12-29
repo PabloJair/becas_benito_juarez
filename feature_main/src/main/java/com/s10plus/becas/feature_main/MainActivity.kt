@@ -26,6 +26,9 @@ class MainActivity: BaseActivity<ActivityMainViewBinding>(R.layout.activity_main
         mp.start()
 
 
+        viewModel.load()
+
+
     }
 
     override fun setupViewModel() {
@@ -40,8 +43,6 @@ class MainActivity: BaseActivity<ActivityMainViewBinding>(R.layout.activity_main
                 is BaseFethData.Success -> {
                 }
                 is BaseFethData.Loader -> {
-
-                    if (it.isShow) showLoader() else hideLoader()
                 }
 
             }
@@ -55,7 +56,7 @@ class MainActivity: BaseActivity<ActivityMainViewBinding>(R.layout.activity_main
     override fun init() {
         val userInformation = intent.getParcelableExtra<UserInformation>(Constans.DATA_EXTRAS)
 
-        viewModel.getModules(userInformation.idUser, userInformation.idCompany)
+      //  viewModel.getModules(userInformation.idUser, userInformation.idCompany)
 
         assignFragment(R.id.containerFragment, FragmentMenu.newInstanceMainMenu(this))
 

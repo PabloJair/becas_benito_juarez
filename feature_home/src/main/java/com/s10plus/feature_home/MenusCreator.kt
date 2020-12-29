@@ -5,11 +5,13 @@ import com.s10plus.feature_home.models.*
 
 object MenusCreator {
 
+     var idCont =0
     public fun Menu_1(context: Context):MenuButtonsModel{
 
         var text = arrayOf<TextDetailModel>(
         TextDetailModel(context.getString(R.string.text_1_becas_edu_basica),""),
-        TextDetailModel(context.getString(R.string.link_1_becas_edu_basica),"https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica")
+        TextDetailModel(context.getString(R.string.link_1_becas_edu_basica),
+            "https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica")
         )
        return MenuButtonsModel("Becas de Educación Básica",R.drawable.ic__595833269522,
             TypeView.DETAILS,detailsModel = DetailsModel(*text)
@@ -21,13 +23,13 @@ object MenusCreator {
     public fun menu_2(context: Context):MenuButtonsModel{
 
 
-        var info_General = arrayOf<TextDetailModel>(
+        val info_General = arrayOf<TextDetailModel>(
             TextDetailModel(context.getString(R.string.text_1_becas_edu_basica),""),
             TextDetailModel(context.getString(R.string.link_1_becas_edu_basica),"https://bienestarazteca.com/")
         )
 
 
-        var submenu =arrayOf(MenuButtonsModel(
+        val submenu =arrayOf(MenuButtonsModel(
             "Información General",
             0,TypeView.DETAILS,
             detailsModel = DetailsModel(*info_General),
@@ -143,7 +145,7 @@ object MenusCreator {
                 detailsModel = DetailsModel(*qd),
                 typeButton = TypeButton.BLACK)
         )
-        return MenuButtonsModel("Controloría Social",R.drawable.ic__595919234976,TypeView.MENU,submenu,detailsModel = null,TypeButton.GREEN
+        return MenuButtonsModel("Contraloría Social",R.drawable.ic__595919234976,TypeView.MENU,submenu,detailsModel = null,TypeButton.GREEN
         )
 
     }
@@ -216,4 +218,5 @@ object MenusCreator {
         )
 
     }
+
 }

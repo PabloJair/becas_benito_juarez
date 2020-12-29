@@ -9,13 +9,18 @@ import com.s10plus.core_application.models.UserInformation
 object GlobalSettings {
 
 
+    var saveReceiverCall = true ;
     const val USER="USER"
-    const val SP_S10PLUS="SP_S10PLUS"
+    const val SP_S10PLUS="SP_S10PLUS-AMAD"
+    const val TOKEN="TOKEN"
     const val SP_INTERCEPTER_PHONE="SP_INTERCEPTER_PHONE"
     const val SP_NUMBER_PHONE="SP_NUMBER_PHONE"
     const val PHONE_1="5511620300"
-    const val PHONE_2="018005005050"
+    const val PHONE_2="8005005050"
+    const val CURRENT_PHONE="CURRENT_PHONE"
 
+    private var token:String?=null
+    private var current_phone:String?=null
 
     private var userInformation:UserInformation?=null
 
@@ -41,7 +46,38 @@ object GlobalSettings {
             .put(SP_NUMBER_PHONE,phoneNumber)
 
     }
+    fun getToken():String=
+        if(token==null) {
+            token = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getString(TOKEN)
+            token!!
+        }else token!!
 
+
+    fun getCurrentPhone():String=
+        if(current_phone==null|| current_phone.isNullOrEmpty()){
+            current_phone = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getString(CURRENT_PHONE)
+            current_phone!!
+        }else
+            current_phone!!
+
+
+    fun setCurrentPhone( phone:String,lada:String="+521"){
+        if(phone.isNullOrEmpty())
+            return
+        current_phone = if (phone.isNotEmpty()) {
+            SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).put(CURRENT_PHONE, "$lada$phone")
+            "$lada$phone"
+        }else {
+            SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).put(CURRENT_PHONE, "")
+            ""
+        }
+
+    }
+    fun setToken( token:String){
+        SPUtils.getInstance(SP_S10PLUS,Context.MODE_PRIVATE).put(TOKEN,token)
+        this.token = token
+
+    }
     fun getInterceptorPhone():Boolean{
         return SPUtils.getInstance(SP_S10PLUS,Context.MODE_PRIVATE)
             .getBoolean(SP_INTERCEPTER_PHONE)

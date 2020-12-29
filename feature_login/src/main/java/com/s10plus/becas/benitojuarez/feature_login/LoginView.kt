@@ -213,7 +213,7 @@ class LoginView:BaseActivity<ActivityLoginViewBinding>(R.layout.activity_login_v
                                             dialogSendRecoveryPassword.onClick =
                                                     { cod, password, dialog ->
 
-                                                        viewModel.sendPassword(email, password, cod)
+                                                        //viewModel.sendPassword(email, password, cod)
                                                         dialog.dismiss()
 
 

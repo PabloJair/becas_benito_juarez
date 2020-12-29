@@ -10,13 +10,6 @@ import retrofit2.http.POST
 
 interface LoginService {
 
-    @POST(EndPoints.LOGIN)
+    @POST(EndPoints.LOAD)
     fun login(@Body request: LoginRequest): Observable<BaseModel<UserInformation>>
-
-
-    @POST(EndPoints.RECOVERY_PASSWORD)
-    fun recoveryPassword(@Body request: HashMap<String,String>): Observable<BaseModel<String>>
-
-    @POST(EndPoints.SEND_NEW_PASSWORD)
-    fun sendNewPassword(@Body request: HashMap<String,String>): Observable<BaseModel<String>>
 }
