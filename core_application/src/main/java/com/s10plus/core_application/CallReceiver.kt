@@ -23,11 +23,14 @@ class CallReceiver:PhoneCallReceiver() {
 
     override fun onOutgoingCallStarted(ctx: Context?, number: String?, start: Date?) {
         super.onOutgoingCallStarted(ctx, number, start)
-        if(number ==GlobalSettings.PHONE_1 || number==  GlobalSettings.PHONE_2){
+
+     if(number ==GlobalSettings.PHONE_1 || number==  GlobalSettings.PHONE_2){
             if(GlobalSettings.getInterceptorPhone()) {
+
                 GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
-                openApp(ctx, "com.s10plus.becas.benitojuarez")
+                Thread.sleep(1000)
                 endCall(ctx)
+                openApp(ctx!!, "com.s10plus.becas.benitojuarez")
             }else
                 GlobalSettings.saveInterceptorPhone(true, number)
 
@@ -36,6 +39,8 @@ class CallReceiver:PhoneCallReceiver() {
 
     override fun onOutgoingCallEnded(ctx: Context?, number: String?, start: Date?, end: Date?) {
         super.onOutgoingCallEnded(ctx, number, start, end)
+        LogUtils.d("TErmino llamada${number}")
+
     }
 
     @SuppressLint("PrivateApi")
@@ -68,7 +73,7 @@ class CallReceiver:PhoneCallReceiver() {
             telephonyEndCall.invoke(telephonyObject)
             return true
         } catch (e: Exception) {
-            e.printStackTrace()
+            LogUtils.e(e)
             return false
         }
     }

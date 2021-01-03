@@ -46,7 +46,7 @@ class S10PlusApplication: Application(),LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onAppDestroyed(){
         GlobalSettings.saveInterceptorPhone(true,GlobalSettings.getNumberPhone())
-        //Toast.makeText(this, "Destruyo la app", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Destruyo la app", Toast.LENGTH_LONG).show()
 
     }
 

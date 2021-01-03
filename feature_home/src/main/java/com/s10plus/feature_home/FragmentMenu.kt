@@ -33,6 +33,7 @@ import com.s10plus.feature_home.models.TypeView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.header_layout.view.*
 import kotlin.properties.Delegates
+import kotlin.system.exitProcess
 
 class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
@@ -73,13 +74,18 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                     binding.body.addView(ButtonGreenLigthBecas.instance(requireContext(), menu).apply {
                         text = menu.text
                         setImageResource(menu.idIcon)
+                        isEnabled = true
                         onClick = {
                             analyticsViewModel.sendClicks(menu.id,menu.otherInformation)
 
                             GlobalSettings.saveInterceptorPhone(false,GlobalSettings.getNumberPhone())
+                            isEnabled = false
+
+                            Thread.sleep(1000)
 
                             startActivity( Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + menu.numberPhone)));
                             activity.finishAffinity()
+                            exitProcess(0)
 
                         }
                     })

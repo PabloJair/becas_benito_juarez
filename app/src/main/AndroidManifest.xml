@@ -7,11 +7,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
-    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS"/>
-    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS"/>
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
@@ -36,12 +34,19 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.s10plus.core_application.CallReceiver" >
-            <intent-filter android:priority="999">
+        <receiver
+            android:enabled="true"
+            android:exported="true"
+            android:name="com.s10plus.core_application.CallReceiver" >
+            <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:priority="2147483647">
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+            <intent-filter>
+                <!-- REGISTER TO RECEIVE BOOT_COMPLETED EVENTS -->
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
