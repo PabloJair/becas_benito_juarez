@@ -94,6 +94,8 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             && rxPermissions.isGranted(READ_SMS)
             && rxPermissions.isGranted(READ_PHONE_NUMBERS)
             && rxPermissions.isGranted(READ_PHONE_STATE)
+            && rxPermissions.isGranted(READ_CALL_LOG)
+
         ){
             executeApp()
             return
@@ -118,9 +120,9 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             PROCESS_OUTGOING_CALLS,
             CALL_PHONE,
             READ_SMS,
-            READ_PHONE_NUMBERS,
+            READ_CALL_LOG
 
-            ).subscribe {
+        ).subscribe {
             if (!it){
                 if(showMessage) {
                     showDialog(TypeDialog.ERROR,

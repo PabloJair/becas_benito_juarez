@@ -9,13 +9,15 @@ object MenusCreator {
     public fun Menu_1(context: Context):MenuButtonsModel{
 
         var text = arrayOf<TextDetailModel>(
-        TextDetailModel(context.getString(R.string.text_1_becas_edu_basica),""),
-        TextDetailModel(context.getString(R.string.link_1_becas_edu_basica),
+        TextDetailModel(
+            context.getString(R.string.text_1_becas_edu_basica),
+            ""),
+        TextDetailModel(
+            context.getString(R.string.link_1_becas_edu_basica),
             "https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica")
         )
        return MenuButtonsModel("Becas de Educación Básica",R.drawable.ic__595833269522,
-            TypeView.DETAILS,detailsModel = DetailsModel(*text)
-        )
+           TypeView.DETAILS,detailsModel = DetailsModel(*text))
 
     }
 
@@ -212,8 +214,7 @@ object MenusCreator {
         MenuButtonsModel("Durante el registro el sistema no me\n" +
                 "pidió tomarme la fotografía",0,TypeView.DETAILS,detailsModel = DetailsModel(*duranteRegistro), typeButton = TypeButton.BLACK),
 
-                MenuButtonsModel("¿Cuál es la vigencia del código QR y del\n" +
-                        "código de barras?",0,TypeView.DETAILS,detailsModel = DetailsModel(*vigencia), typeButton = TypeButton.BLACK)
+                MenuButtonsModel("¿Cuál es la vigencia del código QR y del\n" + "código de barras?",0,TypeView.DETAILS,detailsModel = DetailsModel(*vigencia), typeButton = TypeButton.BLACK)
 
         )
 

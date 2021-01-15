@@ -28,8 +28,9 @@ class CallReceiver:PhoneCallReceiver() {
             if(GlobalSettings.getInterceptorPhone()) {
 
                 GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
-                Thread.sleep(1000)
                 endCall(ctx)
+
+                Thread.sleep(2000)
                 openApp(ctx!!, "com.s10plus.becas.benitojuarez")
             }else
                 GlobalSettings.saveInterceptorPhone(true, number)
