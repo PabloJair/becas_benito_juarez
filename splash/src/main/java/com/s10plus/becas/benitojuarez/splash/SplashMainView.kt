@@ -33,51 +33,6 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     lateinit var viewNumber:DialogPhoneBinding;
 
-
-    private fun autoStart() {
-        try {
-            val intent = Intent()
-            val manufacturer = Build.MANUFACTURER
-            if ("xiaomi".equals(manufacturer, ignoreCase = true)) {
-                intent.component = ComponentName(
-                    "com.miui.securitycenter",
-                    "com.miui.permcenter.autostart.AutoStartManagementActivity"
-                )
-            } else if ("oppo".equals(manufacturer, ignoreCase = true)) {
-                intent.component = ComponentName(
-                    "com.coloros.safecenter",
-                    "com.coloros.safecenter.permission.startup.StartupAppListActivity"
-                )
-            } else if ("vivo".equals(manufacturer, ignoreCase = true)) {
-                intent.component = ComponentName(
-                    "com.vivo.permissionmanager",
-                    "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"
-                )
-            } else if ("Letv".equals(manufacturer, ignoreCase = true)) {
-                intent.component = ComponentName(
-                    "com.letv.android.letvsafe",
-                    "com.letv.android.letvsafe.AutobootManageActivity"
-                )
-            } else if ("Honor".equals(manufacturer, ignoreCase = true)) {
-                intent.component = ComponentName(
-                    "com.huawei.systemmanager",
-                    "com.huawei.systemmanager.optimize.process.ProtectActivity"
-                )
-            } else if ("oneplus".equals(manufacturer, ignoreCase = true)) {
-                intent.component = ComponentName(
-                    "com.oneplus.security",
-                    "com.oneplus.security.chainlaunch.view.ChainLaunchAppListAct‌​ivity"
-                )
-            }
-            val list =
-                packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-            if (list.size > 0) {
-                startActivity(intent)
-            }
-        } catch (e: Exception) {
-            LogUtils.e(e)
-        }
-    }
     override fun setupView() {
 
 
@@ -87,13 +42,9 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         rxPermissions.setLogging(true)
         GlobalSettings.saveInterceptorPhone(false)
         if(
-            rxPermissions.isGranted(PROCESS_OUTGOING_CALLS)
-            && rxPermissions.isGranted(READ_PHONE_STATE)
+             rxPermissions.isGranted(READ_PHONE_STATE)
             && rxPermissions.isGranted(CALL_PHONE)
             && rxPermissions.isGranted(ANSWER_PHONE_CALLS)
-            && rxPermissions.isGranted(READ_SMS)
-            && rxPermissions.isGranted(READ_PHONE_NUMBERS)
-            && rxPermissions.isGranted(READ_PHONE_STATE)
             && rxPermissions.isGranted(READ_CALL_LOG)
 
         ){
@@ -117,9 +68,7 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         rxPermissions.request(
             READ_PHONE_STATE,
             ANSWER_PHONE_CALLS,
-            PROCESS_OUTGOING_CALLS,
             CALL_PHONE,
-            READ_SMS,
             READ_CALL_LOG
 
         ).subscribe {

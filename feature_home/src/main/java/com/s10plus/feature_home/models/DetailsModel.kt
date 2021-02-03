@@ -11,6 +11,9 @@ class DetailsModel(vararg var texts:TextDetailModel):Parcelable
 @Parcelize
 
 class TextDetailModel(    @Expose(serialize = false) var text:String,    @Expose(serialize = false) var url:String="", @Expose(serialize = false) var email:String="",
-                      var id:Int=++MenusCreator.idCont,
-                      var moreInformation:String= if(url.isNotEmpty()) "CLICK/URL: $url" else if(email.isNotEmpty()) "CLICK/SEND-EMAIL: $email" else "CLICK/DETALLES"
+                      var id:Int=0,
+                      var moreInformation:String= if(url.isNotEmpty()) "CLICK/URL" else if(email.isNotEmpty()) "CLICK/SEND-EMAIL: $email" else "CLICK/DETALLES",
+                      var activity:String="",var label:String ="",var concept:String="",var parent_id:String=""
+
+
 ):Parcelable

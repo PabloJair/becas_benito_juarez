@@ -24,13 +24,15 @@ class CallReceiver:PhoneCallReceiver() {
     override fun onOutgoingCallStarted(ctx: Context?, number: String?, start: Date?) {
         super.onOutgoingCallStarted(ctx, number, start)
 
+        if(number == null){
+            return
+        }
      if(number ==GlobalSettings.PHONE_1 || number==  GlobalSettings.PHONE_2){
             if(GlobalSettings.getInterceptorPhone()) {
 
                 GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
                 endCall(ctx)
 
-                Thread.sleep(2000)
                 openApp(ctx!!, "com.s10plus.becas.benitojuarez")
             }else
                 GlobalSettings.saveInterceptorPhone(true, number)

@@ -43,7 +43,7 @@ abstract class PhoneCallReceiver : BroadcastReceiver() {
     //Incoming call-  goes from IDLE to RINGING when it rings, to OFFHOOK when it's answered, to IDLE when its hung up
     //Outgoing call-  goes from IDLE to OFFHOOK when it dials out, to IDLE when hung up
     fun onCallStateChanged(context: Context?, state: Int, number: String?) {
-        if (lastState == state) {
+        if (lastState == state && savedNumber == number) {
             //No change, debounce extras
             return
         }
@@ -53,22 +53,35 @@ abstract class PhoneCallReceiver : BroadcastReceiver() {
                 callStartTime = Date()
                 savedNumber = number
                 onIncomingCallStarted(context, number, callStartTime)
+                savedNumber = null
+
             }
             TelephonyManager.CALL_STATE_OFFHOOK ->                 //Transition of ringing->offhook are pickups of incoming calls.  Nothing done on them
                 if (lastState != TelephonyManager.CALL_STATE_RINGING) {
+                    savedNumber =if(savedNumber== null) number else savedNumber
                     isIncoming = false
                     callStartTime = Date()
                     onOutgoingCallStarted(context, savedNumber, callStartTime)
+                    savedNumber = null
                 }
-            TelephonyManager.CALL_STATE_IDLE ->                 //Went to idle-  this is the end of a call.  What type depends on previous state(s)
-                if (lastState == TelephonyManager.CALL_STATE_RINGING) {
-                    //Ring but no pickup-  a miss
-                    onMissedCall(context, savedNumber, callStartTime)
-                } else if (isIncoming) {
-                    onIncomingCallEnded(context, savedNumber, callStartTime, Date())
-                } else {
-                    onOutgoingCallEnded(context, savedNumber, callStartTime, Date())
+            TelephonyManager.CALL_STATE_IDLE -> {               //Went to idle-  this is the end of a call.  What type depends on previous state(s)
+                when {
+                    lastState == TelephonyManager.CALL_STATE_RINGING -> {
+                        //Ring but no pickup-  a miss
+                        onMissedCall(context, savedNumber, callStartTime)
+                    }
+                    isIncoming -> {
+                        onIncomingCallEnded(context, savedNumber, callStartTime, Date())
+                    }
+                    else -> {
+                        onOutgoingCallEnded(context, savedNumber, callStartTime, Date())
+                    }
                 }
+                savedNumber = null
+
+            }
+
+
         }
         lastState = state
     }

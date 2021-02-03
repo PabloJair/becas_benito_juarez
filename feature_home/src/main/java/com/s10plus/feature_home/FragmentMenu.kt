@@ -21,6 +21,9 @@ import com.s10plus.core_application.ui.ButtonGreenBecas
 import com.s10plus.core_application.ui.ButtonGreenLigthBecas
 import com.s10plus.core_application.ui.ButtonNSBecas
 import com.s10plus.feature_home.MenusCreator.Menu_1
+import com.s10plus.feature_home.MenusCreator.click_REDES_SOCIALES
+import com.s10plus.feature_home.MenusCreator.click_continue_call
+import com.s10plus.feature_home.MenusCreator.click_url
 import com.s10plus.feature_home.MenusCreator.menu_2
 import com.s10plus.feature_home.MenusCreator.menu_3
 import com.s10plus.feature_home.MenusCreator.menu_4
@@ -136,6 +139,8 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             binding.footer.setOnClickListener {
                 ActivityUtils.openWebView(requireContext(),"https://www.gob.mx/sep")
+                analyticsViewModel.sendClicks(104,"CLICK/BANNER:https://www.gob.mx/sep")
+
 
             }
         }
@@ -220,25 +225,57 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             args.putBoolean(BACK_BUTTON, showButtonBack)
             args.putString(HEADER_TEXT, headerText)
 
-          //  var table = AnalitycsUtils.menuButtonsModelToLog(menuButtonsModel,0);
-          //  LogUtils.d(GsonUtils.toJson(menuButtonsModel))
+          var table = AnalitycsUtils.menuButtonsModelToLog(menuButtonsModel);
+           LogUtils.d(GsonUtils.toJson(menuButtonsModel))
             fragment.arguments = args
             return fragment
         }
 
         fun newInstanceMainMenu(context:Context): FragmentMenu {
 
-            MenusCreator.idCont =0;
+
             return newInstance(arrayOf((
                     Menu_1(context = context)),
                     menu_2(context = context),
                     menu_3(context =context),
                 menu_4(context =context),
                 menu_5(context),
-                MenuButtonsModel("Oficina Cerca de ti",R.drawable.ic_location_on,TypeView.LINK,link = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí"),
-                MenuButtonsModel("Chat en Línea",R.drawable.ic__579079462900,TypeView.WEBVIEW,link ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=" ),
-                MenuButtonsModel("Atención de un agente",R.drawable.ic_phone,TypeView.CONTINUE_CALL,numberPhone = GlobalSettings.getNumberPhone(),typeButton = TypeButton.CALL ),
-                MenuButtonsModel("Redes Sociales",R.drawable.ic_earth,TypeView.REDES_SOCIALES,numberPhone ="",typeButton = TypeButton.SN ),
+                MenuButtonsModel(
+                        "Oficina Cerca de ti",R.drawable.ic_location_on,
+                        TypeView.LINK,link = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
+                        id = 35,
+                        activity = click_url,
+                        label ="https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
+                        concept = "Oficina Cerca de ti",
+                        parent_id = "0"
+                ),
+                MenuButtonsModel("Chat en Línea",
+                        R.drawable.ic__579079462900,
+                        TypeView.WEBVIEW,
+                        link ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=",
+                        id = 34,
+                        activity = click_url,
+                        label ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=",
+                        concept = "Chat en Línea",
+                        parent_id = "0"
+                        ),
+                MenuButtonsModel("Atención de un agente",
+                        R.drawable.ic_phone,
+                        TypeView.CONTINUE_CALL,
+                        numberPhone = GlobalSettings.getNumberPhone(),
+                        typeButton = TypeButton.CALL ,
+                        id = 35,
+                        activity = click_continue_call,
+                        label =GlobalSettings.getNumberPhone(),
+                        concept = "Atención de un agente",
+                        parent_id = "0"),
+                MenuButtonsModel("Redes Sociales",R.drawable.ic_earth,TypeView.REDES_SOCIALES,numberPhone ="",typeButton = TypeButton.SN ,
+                        id = 36,
+                        activity = click_REDES_SOCIALES,
+                        label ="Redes Sociales",
+                        concept = "Redes Sociales",
+                        parent_id = "0"
+                        ),
 
                 ),false,"")
         }

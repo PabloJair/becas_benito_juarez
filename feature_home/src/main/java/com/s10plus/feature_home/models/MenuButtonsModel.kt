@@ -30,7 +30,7 @@ class MenuButtonsModel(
     @Expose(serialize = false)
     @SerializedName("numberPhone")
     var numberPhone:String="",
-    var id:Int =++MenusCreator.idCont,
+    var id:Int =0,
     var otherInformation:String =when(sendToFragment){
         MENU -> "${sendToFragment.description} $text"
         DETAILS -> "${sendToFragment.description} ${text}"
@@ -40,7 +40,11 @@ class MenuButtonsModel(
         WEBVIEW -> "${sendToFragment.description} $link"
 
 
-    }
+    },
+    var activity:String="",
+    var label:String ="",
+    var concept:String="",
+    var parent_id:String=""
                        ):Parcelable {
 }
 @Parcelize
