@@ -28,7 +28,6 @@
             android:textAlignment="center"
             android:gravity="center"
             android:layout_margin="5dp"
-            android:visibility="visible"
             android:text="El horario de Atención de nuestro  Call Center es de: 9:00 -18:00 hrs. Por favor intente alguna de las siguientes opciones de nuestro Menú Digital"
             android:textSize="14sp"
             />

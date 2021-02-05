@@ -1,6 +1,5 @@
 include ':feature_home'
 include ':feature_main'
-include ':feature_login'
 include ':splash'
 include ':core_application'
 include ':app'

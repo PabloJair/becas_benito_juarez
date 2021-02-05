@@ -18,6 +18,8 @@ import com.s10plus.feature_home.models.DetailsModel
 import com.s10plus.feature_home.models.MenuButtonsModel
 import kotlinx.android.synthetic.main.fragment_beb.*
 import kotlinx.android.synthetic.main.header_layout.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.properties.Delegates
 
 class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb){
@@ -62,7 +64,13 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
             })
         }
 
+        val hour: String = SimpleDateFormat("HH", Locale.US).format(Date())
+        if(hour.toInt() in 9..18) {
+            binding.header.attentionHour.visibility = View.GONE
+        }else {
+            binding.header.attentionHour.visibility = if(headerText.isNotEmpty()) View.VISIBLE else View.GONE
 
+        }
 
         binding.backButton.onClick={
             activity.onBackPressed()

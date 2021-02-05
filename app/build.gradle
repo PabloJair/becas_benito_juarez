@@ -14,7 +14,6 @@ android{
 dependencies {
     implementation project(path: ':core_application')
     implementation project(path: ':splash')
-    implementation project(path: ':feature_login')
     implementation project(path: ':feature_main')
 
 }

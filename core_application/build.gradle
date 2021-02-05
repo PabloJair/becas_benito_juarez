@@ -41,16 +41,16 @@ dependencies {
 
 
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-beta01'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0-rc01'
 
 
-    api 'androidx.room:room-runtime:2.2.5'
-    api "androidx.room:room-ktx:2.2.5"
-    api "androidx.room:room-rxjava2:2.2.5"
+    api 'androidx.room:room-runtime:2.2.6'
+    api "androidx.room:room-ktx:2.2.6"
+    api "androidx.room:room-rxjava2:2.2.6"
 
-    kapt 'androidx.room:room-compiler:2.2.5'
+    kapt 'androidx.room:room-compiler:2.2.6'
     implementation 'androidx.lifecycle:lifecycle-process:2.2.0'
-    api 'androidx.work:work-runtime:2.4.0'
+    api 'androidx.work:work-runtime:2.5.0'
 
     api "com.airbnb.android:lottie:$lottieVersion"
 
@@ -60,11 +60,8 @@ dependencies {
     api "io.reactivex.rxjava3:rxjava:3.0.4"
     api 'com.github.tbruyelle:rxpermissions:0.12'
 
-    api 'com.facebook.android:facebook-login:5.15.3'
-
-
-    api 'com.google.firebase:firebase-analytics:18.0.0'
-    api 'com.google.firebase:firebase-messaging:21.0.0'
+    api 'com.google.firebase:firebase-analytics:18.0.2'
+    api 'com.google.firebase:firebase-messaging:21.0.1'
 
     // Import the BoM for the Firebase platform
     api platform('com.google.firebase:firebase-bom:25.12.0')

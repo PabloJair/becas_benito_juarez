@@ -53,12 +53,19 @@ object GlobalSettings {
         }else token!!
 
 
-    fun getCurrentPhone():String=
+    fun getCurrentPhone(quitExtension:Boolean = false):String=
         if(current_phone==null|| current_phone.isNullOrEmpty()){
             current_phone = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getString(CURRENT_PHONE)
-            current_phone!!
-        }else
-            current_phone!!
+            if(quitExtension){
+            current_phone?.replace("+521","")!!
+            }else
+                current_phone!!
+        }else {
+            if(quitExtension){
+                current_phone?.replace("+521","")!!
+            }else
+                current_phone!!
+        }
 
 
     fun setCurrentPhone( phone:String,lada:String="+521"){

@@ -2,15 +2,13 @@ package com.s10plus.becas.benitojuarez.splash
 
 import android.Manifest.permission.*
 import android.app.AlertDialog
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
+import android.provider.Settings
 import android.view.LayoutInflater
-import androidx.annotation.RequiresApi
 import androidx.core.widget.addTextChangedListener
-import com.blankj.utilcode.util.LogUtils
 import com.s10plus.becas.benitojuarez.splash.databinding.ActivitySplashBinding
 import com.s10plus.becas.benitojuarez.splash.databinding.DialogPhoneBinding
 import com.s10plus.core_application.CallReceiverService
@@ -26,7 +24,6 @@ import com.tbruyelle.rxpermissions3.RxPermissions
 
 class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
-    @RequiresApi(Build.VERSION_CODES.M)
     var rxPermissions =RxPermissions(this)
     var countPermission=2
     var showMessage = true
@@ -35,16 +32,29 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     override fun setupView() {
 
-
-        startService(Intent(this,CallReceiverService::class.java))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:" + this.packageName)
+                )
+                startActivityForResult(intent, 12345)
+            } else {
+                //Permission Granted-System will work
+            }
+        }
+        startService(Intent(this, CallReceiverService::class.java))
 
         viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this), null, false)
         rxPermissions.setLogging(true)
+        var answare =if((android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)){rxPermissions.isGranted(
+            ANSWER_PHONE_CALLS
+        )} else true
         GlobalSettings.saveInterceptorPhone(false)
         if(
              rxPermissions.isGranted(READ_PHONE_STATE)
             && rxPermissions.isGranted(CALL_PHONE)
-            && rxPermissions.isGranted(ANSWER_PHONE_CALLS)
+            && answare
             && rxPermissions.isGranted(READ_CALL_LOG)
 
         ){
@@ -65,12 +75,24 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         var permissionValidate =0
 
-        rxPermissions.request(
-            READ_PHONE_STATE,
-            ANSWER_PHONE_CALLS,
-            CALL_PHONE,
-            READ_CALL_LOG
+        var permissions = if((android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)){
+            arrayOf<String>(
+                READ_PHONE_STATE,
+                ANSWER_PHONE_CALLS,
+                CALL_PHONE,
+                READ_CALL_LOG
+            )
+        }
+        else{
+            arrayOf<String>(
+                READ_PHONE_STATE,
+                CALL_PHONE,
+                READ_CALL_LOG
+            )
+        }
 
+        rxPermissions.request(
+            *permissions
         ).subscribe {
             if (!it){
                 if(showMessage) {

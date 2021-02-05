@@ -4,11 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.marginBottom
-import androidx.lifecycle.ViewModelProvider
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.LogUtils
 import com.s10plus.core_application.GlobalSettings
@@ -16,10 +12,7 @@ import com.s10plus.core_application.analytics.AnalyticsViewModel
 import com.s10plus.core_application.base_ui.ActivityUtils
 import com.s10plus.core_application.base_ui.BaseFragment
 import com.s10plus.core_application.base_ui.BaseViewModel
-import com.s10plus.core_application.ui.ButtonBlackBecas
-import com.s10plus.core_application.ui.ButtonGreenBecas
-import com.s10plus.core_application.ui.ButtonGreenLigthBecas
-import com.s10plus.core_application.ui.ButtonNSBecas
+import com.s10plus.core_application.ui.*
 import com.s10plus.feature_home.MenusCreator.Menu_1
 import com.s10plus.feature_home.MenusCreator.click_REDES_SOCIALES
 import com.s10plus.feature_home.MenusCreator.click_continue_call
@@ -32,6 +25,8 @@ import com.s10plus.feature_home.databinding.FragmentHomeBinding
 import com.s10plus.feature_home.models.*
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.header_layout.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.properties.Delegates
 import kotlin.system.exitProcess
 
@@ -44,8 +39,12 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     lateinit var analyticsViewModel: AnalyticsViewModel
     override fun setupView() {
         menus = (requireArguments().getParcelableArray(DATA)?:throw Exception("Sin Menus ")) as Array<MenuButtonsModel>
-        showButtonBack = requireArguments().getBoolean(BACK_BUTTON,false)
-        headerText = requireArguments().getString(HEADER_TEXT,"")
+        showButtonBack = requireArguments().getBoolean(BACK_BUTTON, false)
+        headerText = requireArguments().getString(HEADER_TEXT, "")
+
+        val format = SimpleDateFormat("HH", Locale.US)
+        val hour: String = format.format(Date())
+
 
         for (menu in menus){
 
@@ -56,7 +55,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         setImageResource(menu.idIcon)
                         onClick = {
 
-                           this@FragmentMenu.onClick(menu)
+                            this@FragmentMenu.onClick(menu)
                         }
                     })
                 }
@@ -66,30 +65,32 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         setImageResource(menu.idIcon)
                         onClick = {
 
-                          this@FragmentMenu.onClick(menu)
+                            this@FragmentMenu.onClick(menu)
                         }
                     })
                 }
                 TypeButton.CALL -> {
-                    binding.body.addView(ButtonGreenLigthBecas.instance(requireContext(), menu).apply {
-                        text = menu.text
-                        setImageResource(menu.idIcon)
-                        isEnabled = true
-                        onClick = {
-                            analyticsViewModel.sendClicks(menu.id,menu.otherInformation)
+                    if(hour.toInt() in 9..18) {
+                        binding.body.addView(ButtonGreenLigthBecas.instance(requireContext(), menu).apply {
+                            text = menu.text
+                            setImageResource(menu.idIcon)
+                            isEnabled = true
+                            onClick = {
+                                analyticsViewModel.sendClicks(menu.id, menu.otherInformation)
 
-                            GlobalSettings.saveInterceptorPhone(false,GlobalSettings.getNumberPhone())
-                            isEnabled = false
+                                GlobalSettings.saveInterceptorPhone(false, GlobalSettings.getNumberPhone())
+                                isEnabled = false
 
-                            Thread.sleep(1000)
+                                Thread.sleep(1000)
 
-                            startActivity( Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + menu.numberPhone)));
-                            activity.finishAffinity()
-                            exitProcess(0)
+                                startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + menu.numberPhone)));
+                                activity.finishAffinity()
+                                exitProcess(0)
 
-                        }
-                    })
+                            }
+                        })
 
+                    }
                 }
                 TypeButton.SN -> {
                     binding.body.addView(ButtonNSBecas.instance(requireContext(), menu).apply {
@@ -97,28 +98,28 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                         setImageResource(menu.idIcon)
                         onClick = {
 
-                           when(it){
-                               ButtonNSBecas.NetworkSocial.youtube -> {
-                                   analyticsViewModel.sendClicks(100,menu.otherInformation+"YOUTUBE")
+                            when (it) {
+                                ButtonNSBecas.NetworkSocial.youtube -> {
+                                    analyticsViewModel.sendClicks(65, menu.otherInformation + "YOUTUBE")
 
-                                   ActivityUtils.openWebView(context = requireContext(),"https://www.youtube.com/becasbenitojuarezoficial")
-                               }
-                               ButtonNSBecas.NetworkSocial.facebook -> {
-                                   analyticsViewModel.sendClicks(101,menu.otherInformation+"FACEBOOK")
+                                    ActivityUtils.openWebView(context = requireContext(), "https://www.youtube.com/becasbenitojuarezoficial")
+                                }
+                                ButtonNSBecas.NetworkSocial.facebook -> {
+                                    analyticsViewModel.sendClicks(64, menu.otherInformation + "FACEBOOK")
 
-                                   ActivityUtils.openWebView(context = requireContext(),"https://www.facebook.com/BecasBenito/")
-                               }
-                               ButtonNSBecas.NetworkSocial.twitter ->{
-                                   analyticsViewModel.sendClicks(102,menu.otherInformation+"TWITTER")
+                                    ActivityUtils.openWebView(context = requireContext(), "https://www.facebook.com/BecasBenito/")
+                                }
+                                ButtonNSBecas.NetworkSocial.twitter -> {
+                                    analyticsViewModel.sendClicks(63, menu.otherInformation + "TWITTER")
 
-                                   ActivityUtils.openWebView(context = requireContext(),"https://twitter.com/BecasBenito")
-                               }
-                           }
+                                    ActivityUtils.openWebView(context = requireContext(), "https://twitter.com/BecasBenito")
+                                }
+                            }
 
                         }
                         onClickVisibility = {
                             binding.rootScroll.post {
-                                binding.rootScroll.smoothScrollTo(0, binding.rootScroll.bottom+it.height)
+                                binding.rootScroll.smoothScrollTo(0, binding.rootScroll.bottom + it.height)
 
                             }
                         }
@@ -138,8 +139,8 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             Picasso.get().load("https://gs.s10plus.com/images/logo_banner.jpeg").placeholder(R.drawable.sep).into(binding.footer)
 
             binding.footer.setOnClickListener {
-                ActivityUtils.openWebView(requireContext(),"https://www.gob.mx/sep")
-                analyticsViewModel.sendClicks(104,"CLICK/BANNER:https://www.gob.mx/sep")
+                ActivityUtils.openWebView(requireContext(), "https://www.gob.mx/sep")
+                analyticsViewModel.sendClicks(66, "CLICK/BANNER:https://www.gob.mx/sep")
 
 
             }
@@ -158,6 +159,12 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
         }
+        if(hour.toInt() in 9..18) {
+            binding.header.attentionHour.visibility = View.GONE
+        }else {
+            binding.header.attentionHour.visibility = View.VISIBLE
+
+        }
 
 
 
@@ -169,37 +176,37 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
 
 
-    fun onClick(menu:MenuButtonsModel){
+    fun onClick(menu: MenuButtonsModel){
         when (menu.sendToFragment) {
             TypeView.MENU -> {
                 activity.assignFragmentBackStack(
-                    fragment = FragmentMenu.newInstance(
-                        menu.subMenu ?: arrayOf(),
-                        true,
-                        menu.text
-                    )
+                        fragment = FragmentMenu.newInstance(
+                                menu.subMenu ?: arrayOf(),
+                                true,
+                                menu.text
+                        )
                 )
             }
             TypeView.DETAILS -> {
                 activity.assignFragmentBackStack(
-                    fragment =
-                    FragmentDetailMenu.newInstance(
-                        menu.detailsModel ?: DetailsModel(), true, menu.text
-                    )
+                        fragment =
+                        FragmentDetailMenu.newInstance(
+                                menu.detailsModel ?: DetailsModel(), true, menu.text
+                        )
                 )
             }
             TypeView.LINK -> {
-                ActivityUtils.openWebView(requireContext(),menu.link)
+                ActivityUtils.openWebView(requireContext(), menu.link)
             }
             TypeView.WEBVIEW -> {
                 activity.assignFragmentBackStack(
-                    fragment =
-                    FragmentWebView.newInstance(menu.link)
+                        fragment =
+                        FragmentWebView.newInstance(menu.link)
                 )
             }
         }
 
-        analyticsViewModel.sendClicks(menu.id,menu.otherInformation)
+        analyticsViewModel.sendClicks(menu.id, menu.otherInformation)
 
 
     }
@@ -207,7 +214,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun setupViewModel() {
-        analyticsViewModel =BaseViewModel.getViewModel(this,AnalyticsViewModel::class.java)
+        analyticsViewModel =BaseViewModel.getViewModel(this, AnalyticsViewModel::class.java)
     }
 
     override fun init() {
@@ -218,7 +225,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         const val BACK_BUTTON ="BACK_BUTTON"
         const val HEADER_TEXT ="HEADER_TEXT"
 
-        fun newInstance(menuButtonsModel: Array<MenuButtonsModel>,showButtonBack:Boolean =false,headerText:String=""): FragmentMenu {
+        fun newInstance(menuButtonsModel: Array<MenuButtonsModel>, showButtonBack: Boolean = false, headerText: String = ""): FragmentMenu {
             val fragment = FragmentMenu()
             val args = Bundle()
             args.putParcelableArray(DATA, menuButtonsModel)
@@ -231,53 +238,54 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             return fragment
         }
 
-        fun newInstanceMainMenu(context:Context): FragmentMenu {
+        fun newInstanceMainMenu(context: Context): FragmentMenu {
 
 
-            return newInstance(arrayOf((
-                    Menu_1(context = context)),
+            return newInstance(arrayOf(
+                    (
+                            Menu_1(context = context)),
                     menu_2(context = context),
-                    menu_3(context =context),
-                menu_4(context =context),
-                menu_5(context),
-                MenuButtonsModel(
-                        "Oficina Cerca de ti",R.drawable.ic_location_on,
-                        TypeView.LINK,link = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
-                        id = 35,
-                        activity = click_url,
-                        label ="https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
-                        concept = "Oficina Cerca de ti",
-                        parent_id = "0"
-                ),
-                MenuButtonsModel("Chat en Línea",
-                        R.drawable.ic__579079462900,
-                        TypeView.WEBVIEW,
-                        link ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=",
-                        id = 34,
-                        activity = click_url,
-                        label ="https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=",
-                        concept = "Chat en Línea",
-                        parent_id = "0"
-                        ),
-                MenuButtonsModel("Atención de un agente",
-                        R.drawable.ic_phone,
-                        TypeView.CONTINUE_CALL,
-                        numberPhone = GlobalSettings.getNumberPhone(),
-                        typeButton = TypeButton.CALL ,
-                        id = 35,
-                        activity = click_continue_call,
-                        label =GlobalSettings.getNumberPhone(),
-                        concept = "Atención de un agente",
-                        parent_id = "0"),
-                MenuButtonsModel("Redes Sociales",R.drawable.ic_earth,TypeView.REDES_SOCIALES,numberPhone ="",typeButton = TypeButton.SN ,
-                        id = 36,
-                        activity = click_REDES_SOCIALES,
-                        label ="Redes Sociales",
-                        concept = "Redes Sociales",
-                        parent_id = "0"
-                        ),
+                    menu_3(context = context),
+                    menu_4(context = context),
+                    menu_5(context),
+                    MenuButtonsModel(
+                            "Oficina Cerca de ti", R.drawable.ic_location_on,
+                            TypeView.LINK, link = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
+                            id = 62,
+                            activity = click_url,
+                            label = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
+                            concept = "Oficina Cerca de ti",
+                            parent_id = "0"
+                    ),
+                    MenuButtonsModel("Chat en Línea",
+                            R.drawable.ic__579079462900,
+                            TypeView.WEBVIEW,
+                            link = "https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=${GlobalSettings.getCurrentPhone(true)}",
+                            id = 61,
+                            activity = click_url,
+                            label = "https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=${GlobalSettings.getCurrentPhone(true)}",
+                            concept = "Chat en Línea",
+                            parent_id = "0"
+                    ),
+                    MenuButtonsModel("Atención de un agente",
+                            R.drawable.ic_phone,
+                            TypeView.CONTINUE_CALL,
+                            numberPhone = GlobalSettings.getNumberPhone(),
+                            typeButton = TypeButton.CALL,
+                            id = 60,
+                            activity = click_continue_call,
+                            label = GlobalSettings.getNumberPhone(),
+                            concept = "Atención de un agente",
+                            parent_id = "0"),
+                    MenuButtonsModel("Redes Sociales", R.drawable.ic_earth, TypeView.REDES_SOCIALES, numberPhone = "", typeButton = TypeButton.SN,
+                            id = 59,
+                            activity = click_REDES_SOCIALES,
+                            label = "Redes Sociales",
+                            concept = "Redes Sociales",
+                            parent_id = "0"
+                    ),
 
-                ),false,"")
+                    ), false, "")
         }
     }
 }

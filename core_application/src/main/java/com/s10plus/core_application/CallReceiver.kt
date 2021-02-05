@@ -2,22 +2,22 @@ package com.s10plus.core_application
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.telecom.TelecomManager
-import android.telephony.TelephonyManager
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.SPUtils
+import com.s10plus.core_application.navigation.AppNavigation
 import com.s10plus.core_application.utils.Device
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.*
+
 
 class CallReceiver:PhoneCallReceiver() {
 
@@ -31,9 +31,23 @@ class CallReceiver:PhoneCallReceiver() {
             if(GlobalSettings.getInterceptorPhone()) {
 
                 GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
-                endCall(ctx)
 
-                openApp(ctx!!, "com.s10plus.becas.benitojuarez")
+                Thread.sleep(1000);
+
+                Observable.fromCallable {
+                    endCall(ctx)
+                    var intent = AppNavigation.openSplash(ctx);
+                    intent.addFlags(
+                        Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or
+                                FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+                    )
+                    S10PlusApplication.currentApplication.startActivity(intent)
+
+                    //openApp(ctx, "com.s10plus.becas.benitojuarez")
+                }.observeOn(AndroidSchedulers.mainThread()).subscribe()
+
+
             }else
                 GlobalSettings.saveInterceptorPhone(true, number)
 
@@ -81,17 +95,5 @@ class CallReceiver:PhoneCallReceiver() {
         }
     }
 
-    private fun openApp(context: Context, packageName: String?): Boolean {
-        val manager = context.packageManager
-        return try {
-            val i = manager.getLaunchIntentForPackage(packageName!!)
-                ?: return false
-            //throw new ActivityNotFoundException();
-            i.addCategory(Intent.CATEGORY_LAUNCHER)
-            context.startActivity(i)
-            true
-        } catch (e: ActivityNotFoundException) {
-            false
-        }
-    }
+
 }
