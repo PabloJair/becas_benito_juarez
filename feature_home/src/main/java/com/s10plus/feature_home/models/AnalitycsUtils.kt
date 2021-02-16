@@ -3,20 +3,25 @@ package com.s10plus.feature_home.models
 object AnalitycsUtils {
 
 
-    fun menuButtonsModelToLog(array: Array<MenuButtonsModel>,  parentMenuButton: MenuButtonsModel? =null):String{
+    fun menuButtonsModelToLog(array: Array<MenuButtonsModel>, level:Int =0):String{
         val sb = StringBuffer()
 
-        array.toList().sortedBy { it.id }
-        .forEach {
-            if(it.detailsModel != null) {
-                sb.append(detailsModelToLog(it.detailsModel!!, parentMenuButton?:it))
-                sb.append("${it.id}|1|opened|${it.activity}|${it.label}|${it.concept}|${(parentMenuButton?.id?:0)}|${it.parent_id}")
-                sb.append(System.lineSeparator());
-            }else{
-                sb.append("${it.id}|1|opened|${it.activity}|${it.label}|${it.concept}|${(parentMenuButton?.id?:0)}|${it.parent_id}")
-                sb.append(System.lineSeparator());
+        array.forEach {
+
+            sb.append("${it.id}|1|opened|${it.activity}|${it.label}|${it.concept}|${(level)}|${it.parent_id}")
+            sb.append(System.lineSeparator());
+
+            if(it.sendToFragment ==TypeView.MENU) {
                 if(!it.subMenu.isNullOrEmpty())
-                    it.subMenu!!.forEach { sb.append(menuButtonsModelToLog(arrayOf(it),it)) }
+                    sb.append(menuButtonsModelToLog(it.subMenu!!,level + 1))
+
+
+            }else if (it.sendToFragment == TypeView.DETAILS){
+                if(it.detailsModel!=null) {
+
+                    sb.append(detailsModelToLog(it.detailsModel!!, level + 1))
+                }
+
             }
         }
 
@@ -26,13 +31,14 @@ object AnalitycsUtils {
 
     fun detailsModelToLog(
         detailsModel: DetailsModel,
-        parentMenuButton: MenuButtonsModel,
-    ):String{
+        level:Int =0):String{
         val sb = StringBuffer()
         detailsModel.texts.forEach {
 
-            sb.append("${it.id}|1|nav|${it.activity}|${it.label}|${it.concept}|${parentMenuButton.id}|${it.parent_id}")
-            sb.append(System.lineSeparator());
+            if(it.sender) {
+                sb.append("${it.id}|1|nav|${it.activity}|${it.label}|${it.concept}|${level}|${it.parent_id}")
+                sb.append(System.lineSeparator());
+            }
 
 
         }

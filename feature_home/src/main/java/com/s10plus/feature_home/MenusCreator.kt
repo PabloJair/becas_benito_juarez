@@ -17,15 +17,16 @@ object MenusCreator {
 
     fun Menu_1(context: Context):MenuButtonsModel{
 
-        var text = arrayOf<TextDetailModel>(
+        var text = arrayOf(
         TextDetailModel(
             context.getString(R.string.text_1_becas_edu_basica),
             "",
                 id = 3,
                 activity = click_detail,
                 label =context.getString(R.string.text_1_becas_edu_basica),
-                concept =context.getString(R.string.text_1_becas_edu_basica),
-                parent_id = "1"
+                concept ="Becas de Educación Básica",
+                parent_id = "1",
+                sender = false
                 ),
         TextDetailModel(
             context.getString(R.string.link_1_becas_edu_basica),
@@ -33,7 +34,7 @@ object MenusCreator {
                 id = 2,
                 activity = click_url,
                 label ="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica",
-                concept = "preguntas frecuentes",
+                concept = "Preguntas frecuentes Educacion Básica",
                 parent_id = "1"
                 )
         )
@@ -56,19 +57,21 @@ object MenusCreator {
                     id = 8,
                     activity = click_detail,
                     label =context.getString(R.string.text_1_becas_edu_basica),
-                    concept =context.getString(R.string.text_1_becas_edu_basica),
-                    parent_id = "6"
+                    concept ="Información General_BA",
+                    parent_id = "6",
+                    sender = false
 
             ),
             TextDetailModel(
                     context.getString(R.string.link_1_becas_edu_basica),
-                    "https://bienestarazteca.com/",
+                    "https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica",
                     id =7,
                     activity = click_url,
-                    label ="preguntas frecuentes",
-                    concept = "https://bienestarazteca.com/",
+                    label ="https://www.gob.mx/becasbenitojuarez/articulos/beca-bienestar-para-las-familias-de-educacion-basica",
+                    concept = "Preguntas frecuentes Educacion Básica",
                     parent_id = "6")
         )
+        //Ligas
 
 
         val submenu =arrayOf(
@@ -80,7 +83,7 @@ object MenusCreator {
                         id =6,
                         activity = click_sub_menu,
                         label ="Información General",
-                        concept = "Información General",
+                        concept = "Información General_BEMS",
                         parent_id = "4"
 
         ),
@@ -103,7 +106,7 @@ object MenusCreator {
                 TypeView.MENU,submenu,
                 detailsModel = null,TypeButton.GREEN,
                 id =4,
-                activity = click_detail,
+                activity = click_menu,
                 label ="Becas de Educación Media Superior",
                 concept = "Becas de Educación Media Superior",
                 parent_id = "0"
@@ -119,7 +122,7 @@ object MenusCreator {
                     activity = click_detail,
                     label =context.getString(R.string.text1_becas_escribiendo_fut_ig),
                     concept =context.getString(R.string.text1_becas_escribiendo_fut_ig),
-                    parent_id = "11"),
+                    parent_id = "11",sender = false),
 
         )
 
@@ -129,7 +132,7 @@ object MenusCreator {
                     activity = click_detail,
                     label =context.getString(R.string.text1_becas_escribiendo_fut_convo),
                     concept =context.getString(R.string.text1_becas_escribiendo_fut_convo),
-                    parent_id = "10"),
+                    parent_id = "10",sender = false),
         )
         var submenu =arrayOf(MenuButtonsModel(
             "Información General",
@@ -139,7 +142,7 @@ object MenusCreator {
                 id =11,
                 activity = click_sub_menu,
                 label ="Información General",
-                concept = "Información General",
+                concept = "Información General_JEF",
                 parent_id = "9"
                 ),
             MenuButtonsModel(
@@ -150,7 +153,7 @@ object MenusCreator {
                     id =10,
                     activity = click_sub_menu,
                     label ="Convocatoria",
-                    concept = "Convocatoria",
+                    concept = "Convocatoria_JEF",
                     parent_id = "9")
         )
         return MenuButtonsModel(
@@ -175,8 +178,8 @@ object MenusCreator {
                     id = 18,
                     activity = click_detail,
                     label =context.getString(R.string.text1_becas_elisa_ig),
-                    concept =context.getString(R.string.text1_becas_elisa_ig),
-                    parent_id = "17"
+                    concept ="Texto_Información General_BEA",
+                    parent_id = "17",sender = false
                     ),
         )
 
@@ -189,7 +192,7 @@ object MenusCreator {
                 id =17,
                 activity = click_sub_menu,
                 label ="Información General",
-                concept = "Información General",
+                concept = "Información General_BEA",
                 parent_id = "14"),
             MenuButtonsModel("Convocatoria",
                 0,TypeView.LINK,
@@ -197,8 +200,8 @@ object MenusCreator {
                 link = "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna",
                     id =16,
                     activity = click_url,
-                    label ="Convocatoria",
-                    concept = "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna",
+                    label = "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna",
+                    concept ="Convocatoria_BEA",
                     parent_id = "14"),
             MenuButtonsModel("Resultados",
                 0,TypeView.LINK,
@@ -206,8 +209,9 @@ object MenusCreator {
                 typeButton = TypeButton.BLACK,
                     id =15,
                     activity = click_url,
-                    label ="Convocatoria",
-                    concept = "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna",
+                    label = "https://www.gob.mx/becasbenitojuarez/articulos/becas-elisa-acuna",
+
+                    concept ="Resultados_BEA",
                     parent_id = "14"))
 
         return MenuButtonsModel("Becas Elisa Acuña",
@@ -229,45 +233,45 @@ object MenusCreator {
                     id = 35,
                     activity = click_detail,
                     label =context.getString(R.string.text1_cs_ig),
-                    concept =context.getString(R.string.text1_cs_ig),
-                    parent_id = "25"),
+                    concept ="Texto_Información General_CS",
+                    parent_id = "25",sender = false),
         )
         var registrate = arrayOf<TextDetailModel>(
             TextDetailModel(context.getString(R.string.text1_registro_repre),
                     id =34,
                     activity = click_detail,
                     label =context.getString(R.string.text1_registro_repre),
-                    concept = context.getString(R.string.text1_registro_repre),
-                    parent_id = "23"),
+                    concept = "Texto_¡Regístrate como representante!_CS",
+                    parent_id = "23",sender = false),
             TextDetailModel(context.getString(R.string.link1_registro_repre),
                     email = "contraloria.basica@becasbenitojuarez.gob.mx",
                     id =33,
                     activity = click_email,
                     label ="contraloria.basica@becasbenitojuarez.gob.mx",
-                    concept = " Representantes de Becas de Educación Básica:",
-                    parent_id = "23"
+                    concept = "Correo_Regístrate como representante!_CS",
+                    parent_id = "23",sender = false
                     ),
             TextDetailModel(context.getString(R.string.link2_registro_repre),
                     email = "contraloria.ems@becasbenitojuarez.gob.mx",
                     id =32,
                     activity = click_email,
                     label ="contraloria.basica@becasbenitojuarez.gob.mx",
-                    concept = "Educación Media Superior:",
-                    parent_id = "23"),
+                    concept = "Correo_Regístrate como representante!_CS",
+                    parent_id = "23",sender = false),
             TextDetailModel(context.getString(R.string.link3_registro_repre),
                     email = "contraloria.superior@becasbenitojuarez.gob.mx",
                     id =31,
                     activity = click_email,
                     label ="contraloria.basica@becasbenitojuarez.gob.mx",
-                    concept = "Representantes de Jóvenes Escribiendo el Futuro:",
-                    parent_id = "23"),
+                    concept = "Correo_Regístrate como representante!_CS",
+                    parent_id = "23",sender = false),
             TextDetailModel(context.getString(R.string.link4_registro_repre),
                     email = "contraloria.elisaa@becasbenitojuarez.gob.mx",
                     id =30,
                     activity = click_email,
                     label ="contraloria.basica@becasbenitojuarez.gob.mx",
-                    concept = "Representantes de Becas Elisa Acuña:",
-                    parent_id = "23"),
+                    concept = "Correo_Regístrate como representante!_CS",
+                    parent_id = "23",sender = false),
 
             )
         var qd = arrayOf(
@@ -275,30 +279,37 @@ object MenusCreator {
                     id = 29,
                     activity = click_detail,
                     label =context.getString(R.string.text1_qd),
-                    concept =context.getString(R.string.text1_qd),
-                    parent_id = "20"
+                    concept ="Texto_Quejas y denuncias_QD",
+                    parent_id = "20",
+                    sender = false
                     ),
             TextDetailModel(context.getString(R.string.link1_qd),"https://cnprospera-my.sharepoint.com/personal/monserrat_berber_becasbenitojuarez_gob_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias%2FFormato%5FQuejas%5FDenuncias%5F2020%5F%5F%2Epdf&parent=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias&originalPath=aHR0cHM6Ly9jbnByb3NwZXJhLW15LnNoYXJlcG9pbnQuY29tL3BlcnNvbmFsL21vbnNlcnJhdF9iZXJiZXJfYmVjYXNiZW5pdG9qdWFyZXpfZ29iX214L19sYXlvdXRzLzE1L2d1ZXN0YWNjZXNzLmFzcHg_ZG9jaWQ9MTVmMTFiN2M0Nzg0YTRlYzZhYWQyM2ZmOTM2MTA3MTYzJmF1dGhrZXk9QWFYOHlCY1Y3akxRSEMtbEF1dDBDVzgmcnRpbWU9bWFGNlFHLVQyRWc",
                     id = 28,
                     activity = click_url,
-                    concept = "https://cnprospera-my.sharepoint.com/personal/monserrat_berber_becasbenitojuarez_gob_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias%2FFormato%5FQuejas%5FDenuncias%5F2020%5F%5F%2Epdf&parent=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias&originalPath=aHR0cHM6Ly9jbnByb3NwZXJhLW15LnNoYXJlcG9pbnQuY29tL3BlcnNvbmFsL21vbnNlcnJhdF9iZXJiZXJfYmVjYXNiZW5pdG9qdWFyZXpfZ29iX214L19sYXlvdXRzLzE1L2d1ZXN0YWNjZXNzLmFzcHg_ZG9jaWQ9MTVmMTFiN2M0Nzg0YTRlYzZhYWQyM2ZmOTM2MTA3MTYzJmF1dGhrZXk9QWFYOHlCY1Y3akxRSEMtbEF1dDBDVzgmcnRpbWU9bWFGNlFHLVQyRWc",
-                    label = "Descarga el",
-                    parent_id = "20"
+                    label = "https://cnprospera-my.sharepoint.com/personal/monserrat_berber_becasbenitojuarez_gob_mx/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias%2FFormato%5FQuejas%5FDenuncias%5F2020%5F%5F%2Epdf&parent=%2Fpersonal%2Fmonserrat%5Fberber%5Fbecasbenitojuarez%5Fgob%5Fmx%2FDocuments%2FQuejas%20y%20Denuncias&originalPath=aHR0cHM6Ly9jbnByb3NwZXJhLW15LnNoYXJlcG9pbnQuY29tL3BlcnNvbmFsL21vbnNlcnJhdF9iZXJiZXJfYmVjYXNiZW5pdG9qdWFyZXpfZ29iX214L19sYXlvdXRzLzE1L2d1ZXN0YWNjZXNzLmFzcHg_ZG9jaWQ9MTVmMTFiN2M0Nzg0YTRlYzZhYWQyM2ZmOTM2MTA3MTYzJmF1dGhrZXk9QWFYOHlCY1Y3akxRSEMtbEF1dDBDVzgmcnRpbWU9bWFGNlFHLVQyRWc",
+                    concept= "Descarga el",
+                    parent_id = "20",
+                    sender = false
                     ),
             TextDetailModel(context.getString(R.string.text2_qd),
                     id = 27,
                     activity = click_detail,
                     label =context.getString(R.string.text2_qd),
-                    concept =context.getString(R.string.text2_qd),
-                    parent_id = "20"
-                    ),
+                    concept ="Texto_Quejas y denuncias_QD",
+                    parent_id = "20",
+                    sender = false
+
+            ),
             TextDetailModel(context.getString(R.string.link2_qd),email = "atencion@becasbenitojuarez.gob.mx",
 
                     id = 26,
                     activity = click_url,
                     concept = " Envía el formato (escaneado o por fotografía) al correo electrónico",
-                    label = "Descarga el",
-                    parent_id = "20"),
+                    label = "Texto_Quejas y denuncias_QD",
+                    parent_id = "20",
+                    sender = false
+
+            ),
 
             )
 
@@ -311,7 +322,7 @@ object MenusCreator {
                 id =25,
                 activity = click_sub_menu,
                 label ="Información General",
-                concept = "Información General",
+                concept = "Información General_CS",
                 parent_id = "19"
         ),
             MenuButtonsModel("¡Regístrate como representante!",
@@ -330,8 +341,9 @@ object MenusCreator {
                 typeButton = TypeButton.BLACK,
                     id =22,
                     activity = click_url,
-                    label ="Denuncia Ciudadana",
-                    concept = "https://sidec.funcionpublica.gob.mx/#!/",
+                    label = "https://sidec.funcionpublica.gob.mx/#!/",
+                    concept ="Denuncia Ciudadana",
+
                     parent_id = "19"),
             MenuButtonsModel("Ciudadanos Alertadores",
                 0,TypeView.LINK,
@@ -340,8 +352,8 @@ object MenusCreator {
                 typeButton = TypeButton.BLACK,
                     id =21,
                     activity = click_url,
-                    label ="Ciudadanos Alertadores",
-                    concept = "https://alertadores.funcionpublica.gob.mx/",
+                    label = "https://alertadores.funcionpublica.gob.mx/",
+                    concept ="Ciudadanos Alertadores",
                     parent_id = "19"
                     ),
             MenuButtonsModel("Quejas y Denuncias",
@@ -377,14 +389,16 @@ object MenusCreator {
                     id = 58,
                     activity = click_detail,
                     label =context.getString(R.string.text_1_que_es_bien_azteca),
-                    concept =context.getString(R.string.text_1_que_es_bien_azteca),
-                    parent_id = "44"),
+                    concept ="¿Qué es Bienestar Azteca?",
+                    parent_id = "44",
+                    sender = false
+                    ),
             TextDetailModel(context.getString(R.string.link_1_que_es_bien_azteca),
                     "https://bienestarazteca.com/",
                     id =57,
                     activity = click_url,
                     label ="https://bienestarazteca.com/",
-                    concept = "para que puedas recibir tu beca de forma electrónica.",
+                    concept = "¿Qué es Bienestar Azteca?",
                     parent_id = "44"
             )
         )
@@ -394,22 +408,22 @@ object MenusCreator {
                     id = 56,
                     activity = click_detail,
                     label =context.getString(R.string.text_1_etapa_1_registro),
-                    concept =context.getString(R.string.text_1_etapa_1_registro),
-                    parent_id = "3"),
+                    concept ="Etapa 1. Registro",
+                    parent_id = "43",sender = false),
             TextDetailModel(context.getString(R.string.link_1_etapa_1_registro),
                     "https://bienestarazteca.com/",
                     id =55,
                     activity = click_url,
                     label ="https://bienestarazteca.com/",
-                    concept = "Lee el aviso de Privacidad.",
+                    concept = "Etapa 1. Registro",
                     parent_id = "43"
                     ),
             TextDetailModel(context.getString(R.string.text_2_etapa_1_registro),"",
                     id = 54,
                     activity = click_detail,
                     label =context.getString(R.string.text_2_etapa_1_registro),
-                    concept =context.getString(R.string.text_2_etapa_1_registro),
-                    parent_id = "43"),
+                    concept ="Etapa 1. Registro",
+                    parent_id = "43",sender = false),
 
         )
 
@@ -419,14 +433,14 @@ object MenusCreator {
                     id = 53,
                     activity = click_detail,
                     label =context.getString(R.string.text_1_etapa_2_recibe),
-                    concept =context.getString(R.string.text_1_etapa_2_recibe),
-                    parent_id = "42"),
+                    concept ="Texto_Etapa 2. Recibe tu beca_BA",
+                    parent_id = "42",sender = false),
             TextDetailModel(context.getString(R.string.link_1_etapa_2_recibe),
                     "https://bienestarazteca.com/",
                     id =52,
                     activity = click_url,
                     label ="https://bienestarazteca.com/",
-                    concept = "1. Ingresa nuevamente ",
+                    concept = "Banco Bienestar Azteca",
                     parent_id = "42")
         )
 
@@ -435,8 +449,8 @@ object MenusCreator {
                     id = 51,
                     activity = click_detail,
                     label =context.getString(R.string.text_1_ayuda_no_me_),
-                    concept =context.getString(R.string.text_1_ayuda_no_me_),
-                    parent_id = "41"),
+                    concept ="Texto_¡Ayuda! No me puedo registrar._BA",
+                    parent_id = "41",sender = false),
         )
 
         var nomellega = arrayOf<TextDetailModel>(
@@ -444,8 +458,8 @@ object MenusCreator {
                     id = 50,
                     activity = click_detail,
                     label =context.getString(R.string.text_1_ayuda_no_me_),
-                    concept =context.getString(R.string.text_1_ayuda_no_me_),
-                    parent_id = "40"),
+                    concept ="Texto_No me llega el código de verificación ni al correo ni al teléfono_BA",
+                    parent_id = "40",sender = false),
         )
 
         var olvidepassword = arrayOf<TextDetailModel>(
@@ -455,15 +469,15 @@ object MenusCreator {
                     id =49,
                     activity = click_url,
                     label ="https://bienestarazteca.com/",
-                    concept = "1) Ingresa a ",
+                    concept = "Banco Bienestar Azteca",
                     parent_id = "39"),
 
             TextDetailModel(context.getString(R.string.text1_olvide_password),"",
                     id = 48,
                     activity = click_detail,
                     label =context.getString(R.string.text1_olvide_password),
-                    concept =context.getString(R.string.text1_olvide_password),
-                    parent_id = "39"),
+                    concept ="Texto_Olvide mi password_BA",
+                    parent_id = "39",sender = false),
         )
 
         var micolonia = arrayOf<TextDetailModel>(
@@ -472,8 +486,9 @@ object MenusCreator {
                     id = 47,
                     activity = click_detail,
                     label =context.getString(R.string.text1_no_aparece_colonia),
-                    concept =context.getString(R.string.text1_no_aparece_colonia),
-                    parent_id = "38"),
+                    concept ="Texto_Mi colonia y/o mi código postal no" +
+                            "aparece en el listado desplegable_BA",
+                    parent_id = "38",sender = false),
         )
 
 
@@ -483,8 +498,8 @@ object MenusCreator {
                     id = 46,
                     activity = click_detail,
                     label =context.getString(R.string.text1_durante_registro),
-                    concept =context.getString(R.string.text1_durante_registro),
-                    parent_id = "37"),
+                    concept ="Texto_Durante el registro el sistema no me "+"pidió tomarme la fotografía_BA",
+                    parent_id = "37",sender = false),
         )
 
 
@@ -495,8 +510,8 @@ object MenusCreator {
                     id =45,
                     activity = click_detail,
                     label =context.getString(R.string.text1_durante_registro),
-                    concept = context.getString(R.string.text1_durante_registro),
-                    parent_id = "36"),
+                    concept ="Texto_¿Cuál es la vigencia del código QR y del código de barras?_BA",
+                    parent_id = "36",sender = false),
             )
         return arrayOf(
             MenuButtonsModel("¿Qué es Bienestar Azteca?",

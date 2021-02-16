@@ -100,17 +100,17 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
                             when (it) {
                                 ButtonNSBecas.NetworkSocial.youtube -> {
-                                    analyticsViewModel.sendClicks(65, menu.otherInformation + "YOUTUBE")
+                                    analyticsViewModel.sendClicks(65, "YOUTUBE")
 
                                     ActivityUtils.openWebView(context = requireContext(), "https://www.youtube.com/becasbenitojuarezoficial")
                                 }
                                 ButtonNSBecas.NetworkSocial.facebook -> {
-                                    analyticsViewModel.sendClicks(64, menu.otherInformation + "FACEBOOK")
+                                    analyticsViewModel.sendClicks(64, "FACEBOOK")
 
                                     ActivityUtils.openWebView(context = requireContext(), "https://www.facebook.com/BecasBenito/")
                                 }
                                 ButtonNSBecas.NetworkSocial.twitter -> {
-                                    analyticsViewModel.sendClicks(63, menu.otherInformation + "TWITTER")
+                                    analyticsViewModel.sendClicks(63,  "TWITTER")
 
                                     ActivityUtils.openWebView(context = requireContext(), "https://twitter.com/BecasBenito")
                                 }
@@ -140,7 +140,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             binding.footer.setOnClickListener {
                 ActivityUtils.openWebView(requireContext(), "https://www.gob.mx/sep")
-                analyticsViewModel.sendClicks(66, "CLICK/BANNER:https://www.gob.mx/sep")
+                analyticsViewModel.sendClicks(66, "SEP")
 
 
             }
@@ -232,8 +232,8 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             args.putBoolean(BACK_BUTTON, showButtonBack)
             args.putString(HEADER_TEXT, headerText)
 
-          var table = AnalitycsUtils.menuButtonsModelToLog(menuButtonsModel);
-           LogUtils.d(GsonUtils.toJson(menuButtonsModel))
+         // var table = AnalitycsUtils.menuButtonsModelToLog(menuButtonsModel);
+         //  LogUtils.d(GsonUtils.toJson(menuButtonsModel))
             fragment.arguments = args
             return fragment
         }
@@ -254,7 +254,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                             id = 62,
                             activity = click_url,
                             label = "https://www.google.com/maps/search/Coordinación nacional de becas cerca de mí",
-                            concept = "Oficina Cerca de ti",
+                            concept = "OFICINA CERCA DE TI",
                             parent_id = "0"
                     ),
                     MenuButtonsModel("Chat en Línea",
@@ -264,7 +264,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                             id = 61,
                             activity = click_url,
                             label = "https://cariai.com/cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN?start_stamp=1588883184851&botId=547&appType=1&chatId=705765892&key=cVhlaTdqekZaZkkyL1VJUDd0VjFiUWRwb2tWbjdsQi9LWC9za2oyQllVLzNPWmRN&log_session=62547124&r=1&reg=3&Ancho=375&Alto=667&phoneNumber=${GlobalSettings.getCurrentPhone(true)}",
-                            concept = "Chat en Línea",
+                            concept = "CHAT EN LINEA",
                             parent_id = "0"
                     ),
                     MenuButtonsModel("Atención de un agente",
@@ -275,7 +275,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                             id = 60,
                             activity = click_continue_call,
                             label = GlobalSettings.getNumberPhone(),
-                            concept = "Atención de un agente",
+                            concept = "CONTINUAR LA LLAMADA",
                             parent_id = "0"),
                     MenuButtonsModel("Redes Sociales", R.drawable.ic_earth, TypeView.REDES_SOCIALES, numberPhone = "", typeButton = TypeButton.SN,
                             id = 59,

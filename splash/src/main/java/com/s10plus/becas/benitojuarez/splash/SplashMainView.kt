@@ -1,6 +1,7 @@
 package com.s10plus.becas.benitojuarez.splash
 
 import android.Manifest.permission.*
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -9,6 +10,8 @@ import android.os.Build
 import android.provider.Settings
 import android.view.LayoutInflater
 import androidx.core.widget.addTextChangedListener
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.s10plus.becas.benitojuarez.splash.databinding.ActivitySplashBinding
 import com.s10plus.becas.benitojuarez.splash.databinding.DialogPhoneBinding
 import com.s10plus.core_application.CallReceiverService
@@ -27,6 +30,8 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
     var rxPermissions =RxPermissions(this)
     var countPermission=2
     var showMessage = true
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
 
     lateinit var viewNumber:DialogPhoneBinding;
 
@@ -47,20 +52,24 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this), null, false)
         rxPermissions.setLogging(true)
-        var answare =if((android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)){rxPermissions.isGranted(
+        var answare =if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){rxPermissions.isGranted(
             ANSWER_PHONE_CALLS
         )} else true
         GlobalSettings.saveInterceptorPhone(false)
         if(
-             rxPermissions.isGranted(READ_PHONE_STATE)
-            && rxPermissions.isGranted(CALL_PHONE)
-            && answare
-            && rxPermissions.isGranted(READ_CALL_LOG)
+                rxPermissions.isGranted(READ_PHONE_STATE)
+                && rxPermissions.isGranted(CALL_PHONE)
+                && answare
+                && rxPermissions.isGranted(READ_CALL_LOG)
+                && rxPermissions.isGranted(ACCESS_FINE_LOCATION)
+                && rxPermissions.isGranted(ACCESS_COARSE_LOCATION)
+
 
         ){
             executeApp()
             return
         }
+
 
         validatePermission()
 
@@ -75,19 +84,23 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         var permissionValidate =0
 
-        var permissions = if((android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)){
-            arrayOf<String>(
+        var permissions = if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){
+            arrayOf(
                 READ_PHONE_STATE,
                 ANSWER_PHONE_CALLS,
                 CALL_PHONE,
-                READ_CALL_LOG
+                READ_CALL_LOG,
+                ACCESS_COARSE_LOCATION,
+                ACCESS_FINE_LOCATION
             )
         }
         else{
-            arrayOf<String>(
+            arrayOf(
                 READ_PHONE_STATE,
                 CALL_PHONE,
-                READ_CALL_LOG
+                READ_CALL_LOG,
+                ACCESS_COARSE_LOCATION,
+                ACCESS_FINE_LOCATION
             )
         }
 
@@ -118,7 +131,9 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
     }
 
 
+    @SuppressLint("MissingPermission")
     private fun executeApp(){
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
         if(Device.getLineNumberPhone(S10PlusApplication.currentApplication).isEmpty()){
 
@@ -161,6 +176,11 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             Thread.sleep(5000)
             runOnUiThread {
 
+                fusedLocationClient.lastLocation.addOnSuccessListener { 
+                    
+                   GlobalSettings.lat= it.latitude
+                    GlobalSettings.lng = it.longitude
+                }
                 if(GlobalSettings.validateSession())
                     startActivity(AppNavigation.openMainView(this).apply {
                         putExtra(Constans.DATA_EXTRAS, GlobalSettings.getUser())

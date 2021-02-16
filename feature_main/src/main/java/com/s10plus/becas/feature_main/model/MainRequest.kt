@@ -14,9 +14,17 @@ data class MainRequest(
     @SerializedName("model")
     var model: String = Build.MODEL,
     @SerializedName("other_information")
-    var otherInformation: String = "",
+    var otherInformation: OtherInformation = OtherInformation(),
     @SerializedName("phone_id")
     var phoneId: String = Device.getSerialNumber()?:"",
     @SerializedName("phone_number")
     var phoneNumber: String = GlobalSettings.getCurrentPhone()
+)
+data class OtherInformation(
+    @SerializedName("lat")
+    var lat: Double = GlobalSettings.lat,
+    @SerializedName("long")
+    var long: Double =GlobalSettings.lng,
+    @SerializedName("origin")
+    var origin: String = "QR"
 )

@@ -54,9 +54,8 @@ class FragmentDetailMenu :BaseFragment<FragmentBebBinding>(R.layout.fragment_beb
                         ActivityUtils.openEmail(requireContext(), it.email)
 
                     }
-
-
-                    analyticsViewModel.sendClicks(it.id,it.moreInformation)
+                    if(it.sender)
+                        analyticsViewModel.sendClicks(it.id,it.moreInformation)
 
 
                 }

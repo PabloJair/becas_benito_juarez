@@ -18,6 +18,8 @@ object GlobalSettings {
     const val PHONE_1="5511620300"
     const val PHONE_2="8005005050"
     const val CURRENT_PHONE="CURRENT_PHONE"
+     var lat:Double=0.toDouble()
+     var  lng:Double=0.0
 
     private var token:String?=null
     private var current_phone:String?=null
