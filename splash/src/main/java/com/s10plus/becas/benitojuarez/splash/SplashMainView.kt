@@ -178,8 +178,8 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
                 fusedLocationClient.lastLocation.addOnSuccessListener { 
                     
-                   GlobalSettings.lat= it.latitude
-                    GlobalSettings.lng = it.longitude
+                   GlobalSettings.lat= it?.latitude?:0.toDouble()
+                    GlobalSettings.lng = it?.longitude?:0.toDouble()
                 }
                 if(GlobalSettings.validateSession())
                     startActivity(AppNavigation.openMainView(this).apply {

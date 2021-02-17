@@ -14,3 +14,5 @@
 .cxx
 local.properties
 /.idea/
+/feature_login/build/
+/app/prod/release/

@@ -13,8 +13,9 @@ import kotlin.jvm.Throws
 object Device {// Archos 133 Oxygen : 6.0.1
 
     const val lada = "+521"
+    var serialCache = ""
      fun getSerialNumber(): String {
-        return Settings.Secure.getString(S10PlusApplication.currentApplication.contentResolver, Settings.Secure.ANDROID_ID)?:""
+        return GlobalSettings.getSerial()
     }
 
 

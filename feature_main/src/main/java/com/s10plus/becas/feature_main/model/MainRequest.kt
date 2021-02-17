@@ -26,5 +26,5 @@ data class OtherInformation(
     @SerializedName("long")
     var long: Double =GlobalSettings.lng,
     @SerializedName("origin")
-    var origin: String = "QR"
+    var origin: String = "ANDROID-APP"
 )

@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.SPUtils
 import com.s10plus.core_application.models.UserInformation
+import java.util.*
 
 object GlobalSettings {
 
@@ -13,6 +14,8 @@ object GlobalSettings {
     const val USER="USER"
     const val SP_S10PLUS="SP_S10PLUS-AMAD"
     const val TOKEN="TOKEN"
+    const val SERIAL="SERIAL"
+
     const val SP_INTERCEPTER_PHONE="SP_INTERCEPTER_PHONE"
     const val SP_NUMBER_PHONE="SP_NUMBER_PHONE"
     const val PHONE_1="5511620300"
@@ -22,6 +25,8 @@ object GlobalSettings {
      var  lng:Double=0.0
 
     private var token:String?=null
+    private var serial:String?=null
+
     private var current_phone:String?=null
 
     private var userInformation:UserInformation?=null
@@ -87,6 +92,28 @@ object GlobalSettings {
         this.token = token
 
     }
+
+    fun setSerial( serial:String=UUID.randomUUID().toString().substring(0,15)){
+        SPUtils.getInstance(SP_S10PLUS,Context.MODE_PRIVATE).put(SERIAL,serial)
+        this.serial = serial
+    }
+
+
+
+    fun getSerial():String=
+            if(serial==null|| serial.isNullOrEmpty()) {
+                serial = SPUtils.getInstance(SP_S10PLUS, Context.MODE_PRIVATE).getString(SERIAL)
+
+                if(serial==null|| serial.isNullOrEmpty()){
+                    setSerial()
+                }
+                serial!!
+
+            }else {
+                serial!!
+
+            }
+
     fun getInterceptorPhone():Boolean{
         return SPUtils.getInstance(SP_S10PLUS,Context.MODE_PRIVATE)
             .getBoolean(SP_INTERCEPTER_PHONE)
