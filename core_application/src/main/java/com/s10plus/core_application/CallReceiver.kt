@@ -30,12 +30,12 @@ class CallReceiver:PhoneCallReceiver() {
      if(number ==GlobalSettings.PHONE_1 || number==  GlobalSettings.PHONE_2){
             if(GlobalSettings.getInterceptorPhone()) {
 
-                GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
+               // GlobalSettings.setCurrentPhone(Device.getLineNumberPhone(ctx!!))
 
                 Thread.sleep(1000);
 
                 Observable.fromCallable {
-                    endCall(ctx)
+                    endCall(ctx!!)
                     var intent = AppNavigation.openSplash(ctx);
                     intent.addFlags(
                         Intent.FLAG_ACTIVITY_REORDER_TO_FRONT or
@@ -60,7 +60,7 @@ class CallReceiver:PhoneCallReceiver() {
 
     }
 
-    @SuppressLint("PrivateApi")
+    @SuppressLint("PrivateApi", "MissingPermission")
     fun endCall(context: Context): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val telecomManager = context.getSystemService(Context.TELECOM_SERVICE) as TelecomManager

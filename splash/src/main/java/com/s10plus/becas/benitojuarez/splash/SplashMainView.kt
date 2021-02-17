@@ -9,11 +9,16 @@ import android.os.AsyncTask
 import android.os.Build
 import android.provider.Settings
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import com.blankj.utilcode.util.KeyboardUtils
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.snackbar.Snackbar
 import com.s10plus.becas.benitojuarez.splash.databinding.ActivitySplashBinding
 import com.s10plus.becas.benitojuarez.splash.databinding.DialogPhoneBinding
+import com.s10plus.becas.benitojuarez.splash.ui.CustomSnackbar
 import com.s10plus.core_application.CallReceiverService
 import com.s10plus.core_application.GlobalSettings
 import com.s10plus.core_application.S10PlusApplication
@@ -23,6 +28,7 @@ import com.s10plus.core_application.ui.dialog.TypeDialog
 import com.s10plus.core_application.utils.Constans
 import com.s10plus.core_application.utils.Device
 import com.tbruyelle.rxpermissions3.RxPermissions
+import kotlinx.android.synthetic.main.custom_snackbar_model_one.view.*
 
 
 class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
@@ -135,64 +141,89 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
     private fun executeApp(){
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        if(Device.getLineNumberPhone(S10PlusApplication.currentApplication).isEmpty()){
 
-            if(GlobalSettings.getCurrentPhone()==""){
-                val alert = AlertDialog.Builder(this).setView(viewNumber.root).show()
-                alert.setCancelable(false)
+            if(getNumber()) {
+            AsyncTask.execute {
 
-                viewNumber.editText.addTextChangedListener { text ->
+                Thread.sleep(3000)
+                runOnUiThread {
 
-                    viewNumber.ok.isEnabled = text!!.length>=10
-                }
-                viewNumber.cancel.setOnClickListener {
-                    finish()
-                }
-                viewNumber.ok.setOnClickListener {
+                    fusedLocationClient.lastLocation.addOnSuccessListener {
 
-                    if(viewNumber.editText.text!!.toString().isNotEmpty()) {
-                        GlobalSettings.setCurrentPhone(viewNumber.editText.text!!.toString())
-                        alert.dismiss()
-
-                        if(GlobalSettings.validateSession())
-                            startActivity(AppNavigation.openMainView(this).apply {
-                                putExtra(Constans.DATA_EXTRAS, GlobalSettings.getUser())
-
-                            })
-                        else startActivity(AppNavigation.openMainView(this))
-                        finish()
+                        GlobalSettings.lat = it?.latitude ?: 0.toDouble()
+                        GlobalSettings.lng = it?.longitude ?: 0.toDouble()
                     }
-
+                    goToHome()
                 }
-                return
+
             }
-
-
-
-        }
-
-        AsyncTask.execute {
-
-            Thread.sleep(5000)
-            runOnUiThread {
-
-                fusedLocationClient.lastLocation.addOnSuccessListener { 
-                    
-                   GlobalSettings.lat= it?.latitude?:0.toDouble()
-                    GlobalSettings.lng = it?.longitude?:0.toDouble()
-                }
-                if(GlobalSettings.validateSession())
-                    startActivity(AppNavigation.openMainView(this).apply {
-                        putExtra(Constans.DATA_EXTRAS, GlobalSettings.getUser())
-
-                    })
-                else startActivity(AppNavigation.openMainView(this))
-                finish()
-            }
-
         }
     }
 
+    fun goToHome(){
+
+        if(GlobalSettings.validateSession())
+            startActivity(AppNavigation.openMainView(this).apply {
+                putExtra(Constans.DATA_EXTRAS, GlobalSettings.getUser())
+
+            })
+        else startActivity(AppNavigation.openMainView(this))
+        finish()
+
+    }
+
+    fun getNumber():Boolean{
+
+        if(GlobalSettings.getCurrentPhone()!=""){
+            return true
+        }
+        val alert = AlertDialog.Builder(this).setView(viewNumber.root).show().apply {
+
+            setCancelable(false)
+
+        }
+        viewNumber.cancel.setOnClickListener {
+            GlobalSettings.setCurrentPhone("+5210000000000")
+            getState()
+
+        }
+        viewNumber.ok.setOnClickListener {
+            KeyboardUtils.hideSoftInput(viewNumber.root)
+            alert.dismiss()
+
+            (viewNumber.root.parent as ViewGroup).removeView(viewNumber.root)
+
+            val snack =CustomSnackbar.make(binding.root,"¿Es correcto tu número telefonico?",viewNumber.editText.text!!.toString(),"Si","No",Snackbar.LENGTH_INDEFINITE)
+                .setClickOne {
+                    GlobalSettings.setCurrentPhone(viewNumber.editText.text!!.toString())
+                    getState()
+                }.setClickTwo {
+
+                    it.dismiss()
+                    getNumber()
+
+                }
+
+
+
+            snack.show()
+
+        }
+        return false
+    }
+
+    fun getState (){
+        if(GlobalSettings.getState()==null){
+            DialogChooseState.dialogState(this,{
+                GlobalSettings.setState(it)
+                goToHome()
+            },{
+
+            })
+        }
+
+
+    }
 
     override fun setupViewModel() {
     }

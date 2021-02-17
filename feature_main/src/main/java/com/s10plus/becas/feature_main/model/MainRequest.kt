@@ -18,7 +18,7 @@ data class MainRequest(
     @SerializedName("phone_id")
     var phoneId: String = Device.getSerialNumber()?:"",
     @SerializedName("phone_number")
-    var phoneNumber: String = GlobalSettings.getCurrentPhone()
+    var phoneNumber: String = if(GlobalSettings.getCurrentPhone()=="+5210000000000") "" else GlobalSettings.getCurrentPhone()
 )
 data class OtherInformation(
     @SerializedName("lat")
@@ -26,5 +26,8 @@ data class OtherInformation(
     @SerializedName("long")
     var long: Double =GlobalSettings.lng,
     @SerializedName("origin")
-    var origin: String = "ANDROID-APP"
+    var origin: String = "ANDROID-APP",
+    @SerializedName("state")
+    var state: String = GlobalSettings.getState()?.second?:""
+
 )
