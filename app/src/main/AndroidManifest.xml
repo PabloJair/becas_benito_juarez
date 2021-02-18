@@ -26,6 +26,7 @@
         android:launchMode="singleInstance"
         android:name="com.s10plus.core_application.S10PlusApplication"
         android:theme="@style/AppTheme"
+
         tools:targetApi="n">
         <activity android:name=".MainActivity">
             <intent-filter>

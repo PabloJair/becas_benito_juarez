@@ -1,6 +1,9 @@
 package com.s10plus.becas.feature_main
 
+import android.app.AlertDialog
 import android.media.MediaPlayer
+import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.s10plus.becas.feature_main.databinding.ActivityMainViewBinding
 import com.s10plus.becas.feature_main.di.injectFeature
@@ -35,12 +38,19 @@ class MainActivity: BaseActivity<ActivityMainViewBinding>(R.layout.activity_main
     }
 
     override fun setupObserver() {
-        viewModel.liveDataManager.observe(this, Observer {
+        viewModel.liveDataManager.observe(this, {
             when (it) {
                 is BaseFethData.Error -> {
 
+                    //var view =LayoutInflater.from(this).inflate(R.layout.error_dialog,null)
+                    //view.findViewById<TextView>(R.id.error).text = it.message
+                    //AlertDialog.Builder(this).setView(view).show()
                 }
                 is BaseFethData.Success -> {
+
+                    //var view =LayoutInflater.from(this).inflate(R.layout.error_dialog,null)
+                    //view.findViewById<TextView>(R.id.error).text = it.data as String
+                    //AlertDialog.Builder(this).setView(view).show()
                 }
                 is BaseFethData.Loader -> {
                 }

@@ -142,6 +142,7 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
+
             if(getNumber()) {
             AsyncTask.execute {
 
@@ -183,7 +184,7 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         }
         viewNumber.cancel.setOnClickListener {
-            GlobalSettings.setCurrentPhone("+5210000000000")
+            GlobalSettings.setCurrentPhone("0000000000")
             getState()
 
         }
@@ -195,7 +196,9 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
             val snack =CustomSnackbar.make(binding.root,"¿Es correcto tu número telefonico?",viewNumber.editText.text!!.toString(),"Si","No",Snackbar.LENGTH_INDEFINITE)
                 .setClickOne {
-                    GlobalSettings.setCurrentPhone(viewNumber.editText.text!!.toString())
+                   var number =  if(viewNumber.editText.text!!.toString()=="") "0000000000"
+                   else viewNumber.editText.text!!.toString()
+                    GlobalSettings.setCurrentPhone(number)
                     getState()
                 }.setClickTwo {
 
@@ -220,7 +223,8 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             },{
 
             })
-        }
+        }else
+            goToHome()
 
 
     }

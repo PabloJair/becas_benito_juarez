@@ -53,12 +53,13 @@ object DialogChooseState {
         builder.setCustomTitle(View.inflate(context,R.layout.custom_title_state,null))
         builder.setCancelable(false)
 
-        val animals = state.map { it.key }.toTypedArray()
+
+        val animals = state.toSortedMap().map { it.key }.toTypedArray()
         builder.setItems(animals) { dialog, which ->
 
 
-            val key: String = state.keys.toTypedArray()[which]
-            val value: String = state[key]!!
+            val key: String = state.toSortedMap().keys.toTypedArray()[which]
+            val value: String = state.toSortedMap()[key]!!
 
             onSuccess.invoke(Pair(key, value))
 

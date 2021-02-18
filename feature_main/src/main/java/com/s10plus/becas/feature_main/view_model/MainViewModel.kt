@@ -22,7 +22,7 @@ class MainViewModel:BaseViewModel(){
                 loader.value = false
                 //GlobalSettings.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ4NjM5NzgsImV4cCI6MTYwNDg2NzU3OCwiYXVkIjoiNzU1YjU3MDhkN2IxMDhkODE2YzViOTZlOGJkMDExMGU1MzAxMWRhOSIsImRhdGEiOnsicm9sIjoiMSIsImlkX3VzdWFyaW8iOiJ1c2VyMSIsInVzZXJOYW1lIjoiYWxmb25zb2xvcGV6IiwiZnVsbFVzZXJOYW1lIjoiQWxmb25zbyBMXHUwMGYzcGV6IiwiaWRJbnN0aXR1Y2lvbiI6bnVsbH19.ioU-ZSzdaVDX8FcQXLNuKmFesFnmDsxQDS0iSecD6_4")
                 if(it.status ==200) {
-                    success.value = it.data
+                    success.value = it.token
                     GlobalSettings.setToken(it.token!!)
                 }
 
@@ -32,8 +32,8 @@ class MainViewModel:BaseViewModel(){
             },
             {
                 loader.value = false
-                error.value="Las credenciales son invalidas"
-                GlobalSettings.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ4NjM5NzgsImV4cCI6MTYwNDg2NzU3OCwiYXVkIjoiNzU1YjU3MDhkN2IxMDhkODE2YzViOTZlOGJkMDExMGU1MzAxMWRhOSIsImRhdGEiOnsicm9sIjoiMSIsImlkX3VzdWFyaW8iOiJ1c2VyMSIsInVzZXJOYW1lIjoiYWxmb25zb2xvcGV6IiwiZnVsbFVzZXJOYW1lIjoiQWxmb25zbyBMXHUwMGYzcGV6IiwiaWRJbnN0aXR1Y2lvbiI6bnVsbH19.ioU-ZSzdaVDX8FcQXLNuKmFesFnmDsxQDS0iSecD6_4")
+                error.value=it.message
+               // GlobalSettings.setToken("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MDQ4NjM5NzgsImV4cCI6MTYwNDg2NzU3OCwiYXVkIjoiNzU1YjU3MDhkN2IxMDhkODE2YzViOTZlOGJkMDExMGU1MzAxMWRhOSIsImRhdGEiOnsicm9sIjoiMSIsImlkX3VzdWFyaW8iOiJ1c2VyMSIsInVzZXJOYW1lIjoiYWxmb25zb2xvcGV6IiwiZnVsbFVzZXJOYW1lIjoiQWxmb25zbyBMXHUwMGYzcGV6IiwiaWRJbnN0aXR1Y2lvbiI6bnVsbH19.ioU-ZSzdaVDX8FcQXLNuKmFesFnmDsxQDS0iSecD6_4")
 
 
             })
