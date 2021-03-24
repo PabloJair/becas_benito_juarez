@@ -43,7 +43,7 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
     override fun setupView() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 val intent = Intent(
                     Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -53,21 +53,14 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
             } else {
                 //Permission Granted-System will work
             }
-        }
+        }*/
         startService(Intent(this, CallReceiverService::class.java))
 
         viewNumber = DialogPhoneBinding.inflate(LayoutInflater.from(this), null, false)
         rxPermissions.setLogging(true)
-        var answare =if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){rxPermissions.isGranted(
-            ANSWER_PHONE_CALLS
-        )} else true
+
         GlobalSettings.saveInterceptorPhone(false)
-        if(
-                rxPermissions.isGranted(READ_PHONE_STATE)
-                && rxPermissions.isGranted(CALL_PHONE)
-                && answare
-                && rxPermissions.isGranted(READ_CALL_LOG)
-                && rxPermissions.isGranted(ACCESS_FINE_LOCATION)
+        if(         rxPermissions.isGranted(ACCESS_FINE_LOCATION)
                 && rxPermissions.isGranted(ACCESS_COARSE_LOCATION)
 
 
@@ -92,19 +85,12 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
 
         var permissions = if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){
             arrayOf(
-                READ_PHONE_STATE,
-                ANSWER_PHONE_CALLS,
-                CALL_PHONE,
-                READ_CALL_LOG,
                 ACCESS_COARSE_LOCATION,
                 ACCESS_FINE_LOCATION
             )
         }
         else{
             arrayOf(
-                READ_PHONE_STATE,
-                CALL_PHONE,
-                READ_CALL_LOG,
                 ACCESS_COARSE_LOCATION,
                 ACCESS_FINE_LOCATION
             )

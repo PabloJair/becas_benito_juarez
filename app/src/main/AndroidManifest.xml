@@ -5,13 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG" /> <!-- Permiso para cerrar la llamada-->
 
-    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" /> <!-- Permiso para cerrar la llamada-->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -36,18 +30,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:enabled="true"
-            android:exported="true"
-            android:name="com.s10plus.core_application.CallReceiver"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
-            <intent-filter android:priority="2147483647">
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="android.intent.action.PHONE_STATE" />
-            </intent-filter>
-        </receiver>
 
     </application>
 
