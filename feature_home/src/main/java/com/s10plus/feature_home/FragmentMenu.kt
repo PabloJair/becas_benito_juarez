@@ -83,7 +83,7 @@ class FragmentMenu:BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
                                 Thread.sleep(1000)
 
-                                startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + menu.numberPhone)));
+                                startActivity(Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:" + menu.numberPhone)));
                                 activity.finishAffinity()
                                 exitProcess(0)
 

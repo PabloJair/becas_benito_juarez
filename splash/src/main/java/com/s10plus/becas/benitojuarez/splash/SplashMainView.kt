@@ -86,7 +86,7 @@ class SplashMainView:BaseActivity<ActivitySplashBinding>(R.layout.activity_splas
         var permissions = if((Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)){
             arrayOf(
                 ACCESS_COARSE_LOCATION,
-                ACCESS_FINE_LOCATION
+                ACCESS_FINE_LOCATION,
             )
         }
         else{
